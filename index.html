@@ -17,10 +17,10 @@
 
 		<!-- Navagation bar -->
 		<div id="nav">
-			<ul><a id="link1" href="#">Home</a></ul>
-			<ul><a id="link2" href="#">Register</a></ul>
-			<ul><a id="link3" href="#">Login</a></ul>
-			<ul><a id="link4" href="#" >About</a></ul>
+			<ul><a id="homeLink" href="#">Home</a></ul>
+			<ul><a id="registerLink" href="#">Register</a></ul>
+			<ul><a id="loginLink" href="#">Login</a></ul>
+			<ul><a id="aboutLink" href="#" >About</a></ul>
 		</div>
 		  
 		</br>
@@ -59,12 +59,12 @@
 
 		<!-- register form -->
 		<div class="page b">
-			<form id="regForm" action="">
-				User name: <input type="text" name="UserName" placeholder="Enter your new user name"><br>
-				Password: <input type="text" name="Password" placeholder="Enter your new password"><br>
-				Full name: <input type="text" name="FullName" placeholder="Enter your full name"><br>
-				E-mail: <input type="text" name="Email" placeholder="Enter your E-mail"><br>
-				Birth Date: <input type="text" name="BirthDate" placeholder="Enter your birth date"><br>
+			<form id="regForm" method="POST" action="#" onsubmit="register()">
+				<label for="UserName">User name: </label> 	<input type="text" id="UserName" name="UserName" placeholder="Enter your new user name"><br>
+				<label for="Password">Password: </label> 	<input type="text" id="Password"  name="Password" placeholder="Enter your new password"><br>
+				<label for="FullName">Full name: </label> 	<input type="text" id="FullName"  name="FullName" placeholder="Enter your full name"><br>
+				<label for="Email">E-mail: </label> 		<input type="text" id="Email"  name="Email" placeholder="Enter your E-mail"><br>
+				<label for="BirthDate">Birth Date: </label>	<input type="text" id="BirthDate"  name="BirthDate" placeholder="Enter your birth date"><br>
 				<input type="submit" value="Register">
 			  </form> 
 		</div>
@@ -109,13 +109,6 @@
 		<div class="footer">
 			<p>Footer</p>
 		  </div>
-		
-		  
-
-		  
-
-		
-		
 		
 
 		
