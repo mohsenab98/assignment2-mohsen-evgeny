@@ -72,9 +72,9 @@
 
 		<!-- login page -->
 		<div class="page c">
-			<form id="loginForm" action="#" onsubmit="signIn();">
-				User name: <input id="un" type="text" name="UserNameLogIN" placeholder="Enter your user name"><br>
-				Password: <input id="us" type="text" name="PasswordLogIN" placeholder="Enter your password"><br>
+			<form id="loginForm" method="POST">
+				<label for="UserNameLogIN">User name: </label>	<input id="un" type="text" name="UserNameLogIN" placeholder="Enter your user name"><br>
+				<label for="PasswordLogIN">Password: </label>	<input id="us" type="text" name="PasswordLogIN" placeholder="Enter your password"><br>
 				<input type="submit" value="Log-In">
 			  </form> 		
 		</div>

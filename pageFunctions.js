@@ -106,11 +106,46 @@ var database = [
                 password: password
             });
 
-            // redirect to home page
+            // redirect to home page (TODO: change to game page)
             homePageFunction();
         }  
     });
 
+
+    $('#loginForm').submit(function(event) {
+        event.preventDefault(); // prevent submission of the form’s data
+
+        let userName = document.getElementById("loginForm").elements[0].value;
+        let password =  document.getElementById("loginForm").elements[1].value;
+        let isName = false;
+        let isPassword = false;
+
+        $(".error").remove(); // ensures the form will not have the previous error messages
+
+        for(let i = 0; i < database.length; i++){
+            if(userName === database[i].username ){
+                isName = true;
+                if(password === database[i].password){
+                    isPassword = true;
+                }
+            }
+        }
+    
+        if(!isName){
+            alert("ERROR: Invalid login name");
+            $('#un').after('<span class="error">Invalid login name</span>');
+        }
+
+        else if(!isPassword){
+            alert("ERROR: Invalid password");
+            $('#us').after('<span class="error">Invalid password</span>');
+        }
+        else{
+            alert("SUCCESS");
+            // redirect to home page (TODO: change to game page)
+            homePageFunction();
+        }
+    });
 
 });
 
@@ -127,13 +162,22 @@ function homePageFunction() {
     document.getElementById('homeLink').click();
 };
 
+/*
 function signIn(){
-    var userName = document.getElementById("loginForm").elements[0].value;
-    var password =  document.getElementById("loginForm").elements[1].value;
-	if(userName === database[0].username &&
-		password === database[0].password){
-		alert("SUCCESS");
-	}else{
-		alert("ERROR");
-	}
+    let userName = document.getElementById("loginForm").elements[0].value;
+    let password =  document.getElementById("loginForm").elements[1].value;
+
+    for(let i = 0; i < database.length; i++){
+        if(userName === database[i].username &&
+            password === database[i].password){
+            alert("SUCCESS");
+
+            // redirect to home page (TODO: change to game page)
+            homePageFunction();
+            return;
+        }
+    }
+
+    alert("FAILURE");
 }
+*/
