@@ -6,6 +6,8 @@ var database = [
 	}
 ];
 
+
+
 //nav bar functions
   $(document).ready(function() {
     $('#homeLink').click(function() {
@@ -35,6 +37,8 @@ var database = [
         $(".d").css("visibility","visible");    
         // $(".d").css("position","absolute");
     });
+
+   
 });
 
 // button functions
@@ -49,6 +53,9 @@ function logPageFunction() {
 function homePageFunction() {
     document.getElementById('homeLink').click();
 };
+
+
+// --------------------------------------------------------- REGISTER -------------------------------------------------
 
 function registration(){
     document.querySelector('#regForm').onsubmit = function(event) {
@@ -126,6 +133,8 @@ function registration(){
     };
 }
 
+
+// --------------------------------------------------------- SIGN_IN-------------------------------------------------
 function signIn(){
     document.querySelector('#loginForm').onsubmit = function(event) {
         event.preventDefault(); // prevent submission of the form’s data
@@ -156,9 +165,52 @@ function signIn(){
             $('#us').after('<span class="error">Invalid password</span>');
         }
         else{
-            alert("SUCCESS");
-            // redirect to home page (TODO: change to game page)
-            homePageFunction();
+            $(".page").css("visibility","hidden");
+            $(".homepage").css("visibility","hidden");
+            $(".settings").css("visibility","visible");
+            $(".settings").css("position","absolute");
+            // homePageFunction();
         }
     }
 }
+
+
+function circleFunction(input){
+    var outputCircle = document.getElementById("rangeCircle");
+    outputCircle.innerHTML = input.value;
+};
+
+function monsterFunction(input){
+    var outputMonster = document.getElementById("rangeMonster");
+    outputMonster.innerHTML = input.value;
+};
+
+$(function() {
+    $('.minus,.add').on('click', function() {
+      var $gameTime = $(this).closest('p').find('.gameTime'),
+        currentVal = parseInt($gameTime.val()),
+        isAdd = $(this).hasClass('add');
+      !isNaN(currentVal) && $gameTime.val(
+        isAdd ? ++currentVal : (currentVal > 60 ? --currentVal : currentVal)
+      );
+    });
+  });
+
+  function randomSettings(){
+    var outputCircle = document.getElementById("rangeCircle");
+    var colorSixty = document.getElementById("sixtyPercent");
+    var colorThirty = document.getElementById("thirtyPercent");
+    var colorTen = document.getElementById("tenPercent");
+    var outputTime = document.getElementById("gameTime");
+    var outputMonster = document.getElementById("rangeMonster");
+
+
+  };
+
+  function startGame(){
+    $(".page").css("visibility","hidden");
+    $(".homepage").css("visibility","hidden");
+    $(".game").css("visibility","visible");
+    $(".game").css("position","absolute");
+
+  };

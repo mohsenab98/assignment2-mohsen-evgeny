@@ -120,35 +120,47 @@
 
 		<!-- SettingsPage -->
 		<div class="page settings">
-			<form action="/action_page.php">
-				<label for="fname">First Name</label>
-				<input type="text" id="fname" name="firstname" placeholder="Your name..">
-			
+			<dev >
+				<h1>Game Settings </h1>
+				<!-- arrows -->
+				<!-- TODO -->
+				<label for="arrows">Arrows?????</label>
+
+				
 				<!-- range -->
-				<input type="range" min="50" max="90" value="50" class="slider" id="userRange">
-				<p>Value: <span id="range"></span></p>
+				<input type="range" min="50" max="90" value="50" class="slider circle" oninput="circleFunction(this);">
+				<p>Value: <span id="rangeCircle">50</span></p>
 				  
 				<!-- colors -->
-				<label for="country">Country</label>
-				<select id="country" name="country">
-				  <option value="australia">Australia</option>
-				  <option value="canada">Canada</option>
-				  <option value="usa">USA</option>
-				</select>
-			  
-				<input type="submit" value="Submit">
-			  </form>
+				<label for="favcolor">60% of 5 points</label>
+				<input type="color" id="sixtyPercent" name="favcolor" value="#ff0000"><br><br>
+				<label for="favcolor">30% of 15 points</label>
+				<input type="color" id="thirtyPercent" name="favcolor" value="#ff0000"><br><br>
+				<label for="favcolor">10% of 25 points</label>
+				<input type="color" id="tenPercent" name="favcolor" value="#ff0000"><br><br>
+				  
+				<!-- time -->
+				<p>
+					<img src="http://i.imgur.com/yOadS1c.png"  width="20" height="20" class="minus" />
+					<input id="gameTime" type="number" value="60" min="60" class="gameTime"  />
+					<img  src="http://i.imgur.com/98cvZnj.png" width="20" height="20" class="add" />
+				</p>
+					
+				  
+
+				<!-- monster -->
+				<input type="range" min="1" max="4" value="1" class="slider monster" oninput="monsterFunction(this);">
+				<p>Value: <span id="rangeMonster">1</span></p>
+
+				<!-- random settings -->
+				<button id="random" onclick="randomSettings();">Random Settings</button>
+
+				<button  onclick="startGame();">Start the Game</button>
+			</dev>
 		</div>
 
-		<script>
-			var slider = document.getElementById("userRange");
-			var output = document.getElementById("range");
-			output.innerHTML = slider.value;
-			
-			slider.oninput = function() {
-			  output.innerHTML = this.value;
-			}
-			</script>
+
+
 		<!-- GamePage -->
 		<div class="page game">
 			<div id="score">
