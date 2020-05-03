@@ -121,3 +121,23 @@ div.page{
     text-align: center;
   }
 
+
+  /* settingsPage */
+  .slidecontainer {
+    width: 100%;
+  }
+  
+  
+  .slider:hover {
+    opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    background: #4CAF50;
+    cursor: pointer;
+  }
+  
