@@ -30,6 +30,10 @@ div.page{
   visibility: visible;
 }
 
+.settingsPage{
+  visibility: visible;
+}
+
 #nav ul{
     position: relative;
     float: left;
