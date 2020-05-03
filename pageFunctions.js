@@ -31,9 +31,9 @@ var database = [
 
     $('#aboutLink').click(function() {
         $(".page").css("visibility","hidden");
-        $(".homepage").css("visibility","hidden");
-        $(".d").css("visibility","visible");
-        $(".d").css("position","absolute");
+        $(".homepage").css("visibility","visible");
+        $(".d").css("visibility","visible");    
+        // $(".d").css("position","absolute");
     });
 
     
