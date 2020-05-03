@@ -118,8 +118,37 @@
 		</div>
 
 
+		<!-- SettingsPage -->
+		<div class="page settings">
+			<form action="/action_page.php">
+				<label for="fname">First Name</label>
+				<input type="text" id="fname" name="firstname" placeholder="Your name..">
+			
+				<!-- range -->
+				<input type="range" min="50" max="90" value="50" class="slider" id="userRange">
+				<p>Value: <span id="range"></span></p>
+				  
+				<!-- colors -->
+				<label for="country">Country</label>
+				<select id="country" name="country">
+				  <option value="australia">Australia</option>
+				  <option value="canada">Canada</option>
+				  <option value="usa">USA</option>
+				</select>
+			  
+				<input type="submit" value="Submit">
+			  </form>
+		</div>
 
-
+		<script>
+			var slider = document.getElementById("userRange");
+			var output = document.getElementById("range");
+			output.innerHTML = slider.value;
+			
+			slider.oninput = function() {
+			  output.innerHTML = this.value;
+			}
+			</script>
 		<!-- GamePage -->
 		<div class="page game">
 			<div id="score">

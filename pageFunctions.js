@@ -141,9 +141,14 @@ var database = [
             $('#us').after('<span class="error">Invalid password</span>');
         }
         else{
-            alert("SUCCESS");
+            // alert("SUCCESS");
             // redirect to home page (TODO: change to game page)
-            homePageFunction();
+            
+            $(".page").css("visibility","hidden");
+            $(".homepage").css("visibility","hidden");
+            $(".settings").css("visibility","visible");
+            $(".settings").css("position","absolute");
+            // homePageFunction();
         }
     });
 
