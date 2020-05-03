@@ -174,7 +174,7 @@ function signIn(){
     }
 }
 
-
+//-------------------------------------------------- Setting Page -----------------------------------------------------------
 function circleFunction(input){
     var outputCircle = document.getElementById("rangeCircle");
     outputCircle.innerHTML = input.value;
@@ -185,6 +185,7 @@ function monsterFunction(input){
     outputMonster.innerHTML = input.value;
 };
 
+// add | minus for game time
 $(function() {
     $('.minus,.add').on('click', function() {
       var $gameTime = $(this).closest('p').find('.gameTime'),
@@ -196,6 +197,7 @@ $(function() {
     });
   });
 
+  // random
   function randomSettings(){
     var outputCircle = document.getElementById("rangeCircle");
     var colorSixty = document.getElementById("sixtyPercent");
@@ -204,9 +206,23 @@ $(function() {
     var outputTime = document.getElementById("gameTime");
     var outputMonster = document.getElementById("rangeMonster");
 
-
+    outputCircle.innerHTML = 60 + Math.floor(Math.random() * 31);
+    outputMonster.innerHTML = 1 + Math.floor(Math.random() * 4);
+    outputTime.value = 60 + Math.floor(Math.random() * 100); // check for max integer?
+    colorSixty.value = getRandomColor();
+    colorThirty.value = getRandomColor();
+    colorTen.value = getRandomColor();
   };
 
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  
   function startGame(){
     $(".page").css("visibility","hidden");
     $(".homepage").css("visibility","hidden");
