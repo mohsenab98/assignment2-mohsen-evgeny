@@ -82,6 +82,16 @@ div.page{
     label{
       margin-top: 10px;
     }
+
+  /* lable errors */
+  .error {
+    color: red;
+  }
+  
+  label.error {
+    display: inline;
+  }
+
   /* end of form css*/
 
 
@@ -107,4 +117,3 @@ div.page{
     color: white;
     text-align: center;
   }
-
