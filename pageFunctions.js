@@ -35,10 +35,24 @@ var database = [
         $(".d").css("visibility","visible");    
         // $(".d").css("position","absolute");
     });
+});
 
-    
-/* ------------ submit register: check and add ------------ */
-    $('#regForm').submit(function(event) {
+// button functions
+function regPageFunction() {
+    document.getElementById('registerLink').click();
+};
+
+function logPageFunction() {
+    document.getElementById('loginLink').click();
+};
+
+function homePageFunction() {
+    document.getElementById('homeLink').click();
+};
+
+function registration(){
+    document.querySelector('#regForm').onsubmit = function(event) {
+        
         event.preventDefault(); // prevent submission of the form’s data
 
         let isValidForm = true;
@@ -109,10 +123,11 @@ var database = [
             // redirect to home page (TODO: change to game page)
             homePageFunction();
         }  
-    });
+    };
+}
 
-
-    $('#loginForm').submit(function(event) {
+function signIn(){
+    document.querySelector('#loginForm').onsubmit = function(event) {
         event.preventDefault(); // prevent submission of the form’s data
 
         let userName = document.getElementById("loginForm").elements[0].value;
@@ -130,7 +145,7 @@ var database = [
                 }
             }
         }
-    
+
         if(!isName){
             alert("ERROR: Invalid login name");
             $('#un').after('<span class="error">Invalid login name</span>');
@@ -141,45 +156,9 @@ var database = [
             $('#us').after('<span class="error">Invalid password</span>');
         }
         else{
-            // alert("SUCCESS");
-            // redirect to home page (TODO: change to game page)
-            
-            $(".page").css("visibility","hidden");
-            $(".homepage").css("visibility","hidden");
-            $(".settings").css("visibility","visible");
-            $(".settings").css("position","absolute");
-            // homePageFunction();
-        }
-    });
-
-});
-
-// button functions
-function regPageFunction() {
-    document.getElementById('registerLink').click();
-};
-
-function logPageFunction() {
-    document.getElementById('loginLink').click();
-};
-
-function homePageFunction() {
-    document.getElementById('homeLink').click();
-};
-
-/*
-function signIn(){
-    let userName = document.getElementById("loginForm").elements[0].value;
-    let password =  document.getElementById("loginForm").elements[1].value;
-    for(let i = 0; i < database.length; i++){
-        if(userName === database[i].username &&
-            password === database[i].password){
             alert("SUCCESS");
             // redirect to home page (TODO: change to game page)
             homePageFunction();
-            return;
         }
     }
-    alert("FAILURE");
 }
-*/
