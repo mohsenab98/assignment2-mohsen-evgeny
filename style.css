@@ -26,6 +26,9 @@ div.page{
     visibility: hidden;
 }
 
+.gamePage{
+  visibility: visible;
+}
 
 #nav ul{
     position: relative;

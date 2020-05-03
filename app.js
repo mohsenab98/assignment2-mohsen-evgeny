@@ -82,17 +82,32 @@ function findRandomEmptyCell(board) {
 	return [i, j];
 }
 
+// get keyboard parametrs from user instead the numbers
+var up = 38;
+var down = 40;
+var left = 37;
+var right = 39;
+
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	console.log(keysDown);
+	
+	// Up
+	if (keysDown[up]) {
 		return 1;
 	}
-	if (keysDown[40]) {
+
+	// Down
+	if (keysDown[down]) {
 		return 2;
 	}
-	if (keysDown[37]) {
+
+	// Left
+	if (keysDown[left]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+
+	// Right
+	if (keysDown[right]) {
 		return 4;
 	}
 }
