@@ -6,6 +6,8 @@ var database = [
 	}
 ];
 
+
+
 //nav bar functions
   $(document).ready(function() {
     $('#homeLink').click(function() {
@@ -36,9 +38,28 @@ var database = [
         // $(".d").css("position","absolute");
     });
 
-    
-/* ------------ submit register: check and add ------------ */
-    $('#regForm').submit(function(event) {
+   
+});
+
+// button functions
+function regPageFunction() {
+    document.getElementById('registerLink').click();
+};
+
+function logPageFunction() {
+    document.getElementById('loginLink').click();
+};
+
+function homePageFunction() {
+    document.getElementById('homeLink').click();
+};
+
+
+// --------------------------------------------------------- REGISTER -------------------------------------------------
+
+function registration(){
+    document.querySelector('#regForm').onsubmit = function(event) {
+        
         event.preventDefault(); // prevent submission of the form’s data
 
         let isValidForm = true;
@@ -109,10 +130,13 @@ var database = [
             // redirect to home page (TODO: change to game page)
             homePageFunction();
         }  
-    });
+    };
+}
 
 
-    $('#loginForm').submit(function(event) {
+// --------------------------------------------------------- SIGN_IN-------------------------------------------------
+function signIn(){
+    document.querySelector('#loginForm').onsubmit = function(event) {
         event.preventDefault(); // prevent submission of the form’s data
 
         let userName = document.getElementById("loginForm").elements[0].value;
@@ -130,7 +154,7 @@ var database = [
                 }
             }
         }
-    
+
         if(!isName){
             alert("ERROR: Invalid login name");
             $('#un').after('<span class="error">Invalid login name</span>');
@@ -141,43 +165,68 @@ var database = [
             $('#us').after('<span class="error">Invalid password</span>');
         }
         else{
-            alert("SUCCESS");
-            // redirect to home page (TODO: change to game page)
-            homePageFunction();
-        }
-    });
-
-});
-
-// button functions
-function regPageFunction() {
-    document.getElementById('registerLink').click();
-};
-
-function logPageFunction() {
-    document.getElementById('loginLink').click();
-};
-
-function homePageFunction() {
-    document.getElementById('homeLink').click();
-};
-
-/*
-function signIn(){
-    let userName = document.getElementById("loginForm").elements[0].value;
-    let password =  document.getElementById("loginForm").elements[1].value;
-
-    for(let i = 0; i < database.length; i++){
-        if(userName === database[i].username &&
-            password === database[i].password){
-            alert("SUCCESS");
-
-            // redirect to home page (TODO: change to game page)
-            homePageFunction();
-            return;
+            $(".page").css("visibility","hidden");
+            $(".homepage").css("visibility","hidden");
+            $(".settings").css("visibility","visible");
+            $(".settings").css("position","absolute");
+            // homePageFunction();
         }
     }
-
-    alert("FAILURE");
 }
-*/
+
+//-------------------------------------------------- Setting Page -----------------------------------------------------------
+function circleFunction(input){
+    var outputCircle = document.getElementById("rangeCircle");
+    outputCircle.innerHTML = input.value;
+};
+
+function monsterFunction(input){
+    var outputMonster = document.getElementById("rangeMonster");
+    outputMonster.innerHTML = input.value;
+};
+
+// add | minus for game time
+$(function() {
+    $('.minus,.add').on('click', function() {
+      var $gameTime = $(this).closest('p').find('.gameTime'),
+        currentVal = parseInt($gameTime.val()),
+        isAdd = $(this).hasClass('add');
+      !isNaN(currentVal) && $gameTime.val(
+        isAdd ? ++currentVal : (currentVal > 60 ? --currentVal : currentVal)
+      );
+    });
+  });
+
+  // random
+  function randomSettings(){
+    var outputCircle = document.getElementById("rangeCircle");
+    var colorSixty = document.getElementById("sixtyPercent");
+    var colorThirty = document.getElementById("thirtyPercent");
+    var colorTen = document.getElementById("tenPercent");
+    var outputTime = document.getElementById("gameTime");
+    var outputMonster = document.getElementById("rangeMonster");
+
+    outputCircle.innerHTML = 60 + Math.floor(Math.random() * 31);
+    outputMonster.innerHTML = 1 + Math.floor(Math.random() * 4);
+    outputTime.value = 60 + Math.floor(Math.random() * 100); // check for max integer?
+    colorSixty.value = getRandomColor();
+    colorThirty.value = getRandomColor();
+    colorTen.value = getRandomColor();
+  };
+
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+  
+  function startGame(){
+    $(".page").css("visibility","hidden");
+    $(".homepage").css("visibility","hidden");
+    $(".game").css("visibility","visible");
+    $(".game").css("position","absolute");
+
+  };
