@@ -92,7 +92,7 @@ var right = 39;
 function getUpKey(){
 	let dialog = document.querySelector('#upDialog');
 
-	dialog.show();
+	dialog.showModal();
 
 	document.onkeydown = function(event){
 		up = event.keyCode;
@@ -109,7 +109,7 @@ function getUpKey(){
 function getDownKey(){
 	let dialog = document.querySelector('#downDialog');
 
-	dialog.show();
+	dialog.showModal();
 
 	document.onkeydown = function(event){
 		down = event.keyCode;
@@ -127,7 +127,7 @@ function getDownKey(){
 function getLeftKey(){
 	let dialog = document.querySelector('#leftDialog');
 
-	dialog.show();
+	dialog.showModal();
 
 	document.onkeydown = function(event){
 		left = event.keyCode;
@@ -144,7 +144,7 @@ function getLeftKey(){
 function getRightKey(){
 	let dialog = document.querySelector('#rightDialog');
 
-	dialog.show();
+	dialog.showModal();
 
 	document.onkeydown = function(event){
 		right = event.keyCode;
