@@ -26,13 +26,6 @@ div.page{
     visibility: hidden;
 }
 
-.gamePage{
-  visibility: visible;
-}
-
-.settingsPage{
-  visibility: visible;
-}
 
 #nav ul{
     position: relative;
@@ -125,23 +118,6 @@ div.page{
     text-align: center;
   }
 
+/* span.keysInDialog{
 
-  /* settingsPage */
-  .slidecontainer {
-    width: 100%;
-  }
-  
-  
-  .slider:hover {
-    opacity: 1;
-  }
-  
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background: #4CAF50;
-    cursor: pointer;
-  }
-  
+} */

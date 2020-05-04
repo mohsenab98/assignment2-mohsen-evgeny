@@ -88,6 +88,74 @@ var down = 40;
 var left = 37;
 var right = 39;
 
+// UP
+function getUpKey(){
+	let dialog = document.querySelector('#upDialog');
+
+	dialog.show();
+
+	document.onkeydown = function(event){
+		up = event.keyCode;
+		document.getElementById('upSpan').innerHTML = String.fromCharCode(event.keyCode);
+	}
+
+
+	document.querySelector('#upClose').onclick = function() {
+		dialog.close();
+		}
+}
+
+// DOWN
+function getDownKey(){
+	let dialog = document.querySelector('#downDialog');
+
+	dialog.show();
+
+	document.onkeydown = function(event){
+		down = event.keyCode;
+		document.getElementById('downSpan').innerHTML = String.fromCharCode(event.keyCode);
+	}
+
+
+	document.querySelector('#downClose').onclick = function() {
+		dialog.close();
+	}
+	
+}
+
+// LEFT
+function getLeftKey(){
+	let dialog = document.querySelector('#leftDialog');
+
+	dialog.show();
+
+	document.onkeydown = function(event){
+		left = event.keyCode;
+		document.getElementById('leftSpan').innerHTML = String.fromCharCode(event.keyCode);
+	}
+
+
+	document.querySelector('#leftClose').onclick = function() {
+		dialog.close();
+	}
+}
+
+// RIGHT
+function getRightKey(){
+	let dialog = document.querySelector('#rightDialog');
+
+	dialog.show();
+
+	document.onkeydown = function(event){
+		right = event.keyCode;
+		document.getElementById('rightSpan').innerHTML = String.fromCharCode(event.keyCode);
+	}
+
+
+	document.querySelector('#rightClose').onclick = function() {
+		dialog.close();
+	}
+}
 function GetKeyPressed() {
 	console.log(keysDown);
 	
