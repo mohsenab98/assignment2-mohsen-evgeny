@@ -10,6 +10,7 @@ var database = [
 
 //nav bar functions
   $(document).ready(function() {
+      
     $('#homeLink').click(function() {
         $(".page").css("visibility","hidden");
         $(".homepage").css("visibility","visible");
@@ -145,12 +146,13 @@ function signIn(){
         let isPassword = false;
 
         $(".error").remove(); // ensures the form will not have the previous error messages
-
+        
         for(let i = 0; i < database.length; i++){
             if(userName === database[i].username ){
                 isName = true;
                 if(password === database[i].password){
                     isPassword = true;
+                    document.getElementById("playerName").innerHTML = database[i].username;
                 }
             }
         }
@@ -168,7 +170,7 @@ function signIn(){
             $(".page").css("visibility","hidden");
             $(".homepage").css("visibility","hidden");
             $(".settings").css("visibility","visible");
-            $(".settings").css("position","absolute");
+            // $(".settings").css("position","relative");
             // homePageFunction();
         }
     }
@@ -228,5 +230,5 @@ $(function() {
     $(".homepage").css("visibility","hidden");
     $(".game").css("visibility","visible");
     $(".game").css("position","absolute");
-
+    document.getElementById("song").play(); 
   };

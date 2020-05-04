@@ -8,29 +8,33 @@ body{
     position: relative;
     margin-left:auto;
     margin-right:auto;
-    width: 600px;
+    width: 70%;
  
 }
-img{
-    margin-left: 18%;
+#logo{
+  /* margin-top: 6%; */
+  margin-left: 35%;
 }
 
 div{
     align-content: center;
 }
 div.page{
-    top: 10%;
+    top: 25%;
     right: 0;
     width: 100%;
     height: 100%;
     visibility: hidden;
+    margin-left: 25%;
+    position: absolute;
+
 }
 
 
 #nav ul{
     position: relative;
     float: left;
-    margin-left: 5%;
+    margin-left: 15%;
     margin-top: 10%;
 
 }
@@ -61,14 +65,14 @@ div.page{
     border: none;
     border-radius: 4px;
     cursor: pointer;
-      margin-top: 10px;
-      width: 100%;
+    margin-top: 10px;
+    margin-left: 25%;
+    width: 50%;
     }
 
     input[type=text]{
     background-color: aliceblue(107, 107, 107);
-
-    width: 100%;
+    width: 40%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -81,6 +85,7 @@ div.page{
     
     label{
       margin-top: 10px;
+      margin-left: 25%;
     }
 
   /* lable errors */
@@ -121,3 +126,26 @@ div.page{
 /* span.keysInDialog{
 
 } */
+input[type=range], h1, p{
+  width: auto;
+  margin-left: 25%;
+  }
+
+
+
+  .page.game {
+    display: flex;
+    margin-top: 7%;
+  }
+  
+  #left {
+    flex: 0 0 20%;
+  }
+  
+  #right {
+    flex: 1;
+  }
+
+  #scoreLabel, #timeLabel{
+    margin-left: auto;
+}

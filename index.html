@@ -35,12 +35,7 @@
 			<br/>
 			<br/>
 			<br/>
-				<img src="logo.png"  alt="sometext"  />
-			<br/>
-			<br/>
-			<br/>
-			<br/>
-			<br/>
+				<img src="logo.png"  alt="sometext"  id="logo"/>
 			<br/>
 			<br/>
 			<br/>
@@ -120,7 +115,7 @@
 
 
 		<!-- SettingsPage -->
-		<div class="settingsPage">
+		<div class="page settings">
 
 
 			<h1>Game Settings </h1>
@@ -136,7 +131,7 @@
 			</dialog>
 
 			<br/>
-			<br/>
+			
 
 			<!-- DOWN -->
 			<button id="downButton" onclick="getDownKey()">Choose DOWN</button>
@@ -147,7 +142,7 @@
 			</dialog>
 
 			<br/>
-			<br/>
+			
 
 			<!-- LEFT -->
 			<button id="leftButton" onclick="getLeftKey()">Choose LEFT</button>
@@ -158,7 +153,7 @@
 			</dialog>
 
 			<br/>
-			<br/>
+			
 
 			<!-- RIGHT -->
 			<button id="rightButton" onclick="getRightKey()">Choose RIGHT</button>
@@ -169,7 +164,7 @@
 			</dialog>
 			  
 			<br/>
-			<br/>
+			
 
 			<!-- range -->
 			<label>Change amount of balls:</label>
@@ -194,8 +189,9 @@
 			<label>Change time of the game:</label>
 			<br/>
 			<p>
-				<img src="http://i.imgur.com/yOadS1c.png"  width="20" height="20" class="minus" />
+			
 				<input id="gameTime" type="number" value="60" min="60" class="gameTime"  />
+				<img src="http://i.imgur.com/yOadS1c.png"  width="20" height="20" class="minus" />
 				<img  src="http://i.imgur.com/98cvZnj.png" width="20" height="20" class="add" />
 			</p>
 				
@@ -219,21 +215,28 @@
 
 		<!-- GamePage -->
 		<br/>
-		<div class="gamePage">
-			<div id="score">
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" />
-			</div>
-			<div id="time">
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" />
-			</div>
-			<div id="game">
-				<canvas id="canvas" height="600" width="600"></canvas>
-			</div>
-		</div>
+		<div class="page game">
+            <audio id="song">
+				<source src="Pac-Man-Fever.mp3" type="audio/mpeg">
+			</audio>
+
+			<div id="left">Player Name: <span id="playerName"></span></div>
 
 
+			<div id="right">
+				<div id="score">
+					<label id="scoreLabel"for="lblScore">SCORE:</label>
+					<input id="lblScore" type="text" />
+				</div>
+				<div id="time">
+					<label id="timeLabel" for="lblTime">TIME:</label>
+					<input id="lblTime" type="text" />
+				</div>
+				<div id="game">
+					<canvas id="canvas" height="700" width="700"></canvas>
+				</div>
+			</div>
+		  </div>
 
 		<!-- footer -->
 		<div class="footer">
