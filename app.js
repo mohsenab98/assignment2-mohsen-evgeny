@@ -10,10 +10,12 @@ var interval;
 var x;
 var drawx;
 var drawy;
+var monsters;
+var timeCounter = 0;
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
-	Start();
+	//Start();
 });
 
 // board[i][j]:
@@ -93,8 +95,7 @@ function Start() {
 					board[i][j] = ball;
 				} 
 				
-				else 
-				if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
+				else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;
@@ -107,6 +108,18 @@ function Start() {
 		}
 	}
 
+	// monsters
+	monsters = [
+		{i:1, j:1, img: 'blue.png'},
+		{i:1, j:10, img: 'grey.png'},
+		{i:10, j:1, img: 'pink.png'},
+		{i:10, j:10, img: 'red.png'}
+	]
+
+	// board[1][1] += 100;
+	// board[1][10] += 100;
+	// board[10][1] += 100;
+	// board[10][10] += 100;
 	
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
@@ -266,8 +279,13 @@ function Draw() {
 	for (var i = 0; i < 12; i++) {
 		for (var j = 0; j < 12; j++) {
 			var center = new Object();
+			var top = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
+			top.x = i * 60;
+			top.y = j * 60;
+
+
 			if (board[i][j] == 2) {
 				context.beginPath();
 				if(x == 1){
@@ -329,12 +347,55 @@ function Draw() {
 				context.fillStyle = "black"; //color
 				context.fill();
 			}
+
+
+			// monsters
+			for (var n = 0; n < 4; n++){
+				if(i == monsters[n].i && j == monsters[n].j){
+					let ghost = document.createElement("img");
+					ghost.setAttribute('src', monsters[n].img);
+	
+					context.drawImage(ghost, top.x, top.y);
+				}
+			}
+
+			/*
+			if(i == monster_1_Pos.i && j == monster_1_Pos.j){
+				let ghost = document.createElement("img");
+				ghost.setAttribute('src', 'monster.png');
+
+				context.drawImage(ghost, top.x, top.y);
+			}
+			else if(i == monster_2_Pos.i && j == monster_2_Pos.j){
+				let ghost = document.createElement("img");
+				ghost.setAttribute('src', 'monster.png');
+
+				context.drawImage(ghost, top.x, top.y);
+			}
+			else if(i == monster_3_Pos.i && j == monster_3_Pos.j){
+				let ghost = document.createElement("img");
+				ghost.setAttribute('src', 'monster.png');
+
+				context.drawImage(ghost, top.x, top.y);
+			}
+			else if(i == monster_4_Pos.i && j == monster_4_Pos.j){
+				let ghost = document.createElement("img");
+				ghost.setAttribute('src', 'monster.png');
+
+				context.drawImage(ghost, top.x, top.y);
+			}
+			*/
+
 		}
+		
 	}
 }
 
+
 //updated the if conditions to suit the walls
 function UpdatePosition() {
+	timeCounter++;
+
 	board[shape.i][shape.j] = 0;
 	x = GetKeyPressed();
 	if (x == 1) { //up
@@ -358,6 +419,85 @@ function UpdatePosition() {
 		}
 	}
 
+	// Move monster
+	if (timeCounter % 5 == 0){
+		for (var n = 0; n < 4; n++){
+		
+			let newI;
+			if(monsters[n].i < shape.i){
+				newI = monsters[n].i + 1;
+			}
+			else if (monsters[n].i > shape.i) {
+				newI = monsters[n].i - 1;
+			}
+			else 
+			{
+				newI = monsters[n].i;
+			}
+	
+			if(board[newI][monsters[n].j] != 4)
+			{
+				monsters[n].i = newI;
+			}
+	
+			let newJ;
+			if(monsters[n].j < shape.j){
+				newJ = monsters[n].j + 1;
+			}
+			else if (monsters[n].j > shape.j) {
+				newJ = monsters[n].j - 1;
+			}
+			else 
+			{
+				newJ = monsters[n].j;
+			}
+	
+			if(board[monsters[n].i][newJ] != 4)
+			{
+				monsters[n].j = newJ;
+			}
+		}
+	}
+
+
+
+
+	// Check pacman-monster collision
+	/*
+	if (board[shape.i][shape.j] > 100) {
+		console.log("BOOM!")
+	}
+	*/
+	for (var n = 0; n < 4; n++){
+		if(shape.i == monsters[n].i && shape.j == monsters[n].j){
+			console.log("BOOM!");
+			score -= 10;
+			loses++;
+			
+			if(loses == 5){
+				// TODO:
+				alert("Loser");
+			}
+
+			let i; let j;
+			while(true){
+				let isMonster = false;
+				i = Math.floor(Math.random() * 10) + 1;
+				j = Math.floor(Math.random() * 10) + 1;
+				for (var n = 0; n < 4; n++){
+					if(i == monsters[n].i || j == monsters[n].j){
+						isMonster = true;
+					}
+				}
+				if(board[i][j] != 4 && !isMonster){
+					shape.i = i;
+					shape.j = j;
+					break;
+				}
+			}
+		}
+	}
+
 	// score
 	if (board[shape.i][shape.j] == 1) {
 		score = score + 5;
@@ -376,7 +516,7 @@ function UpdatePosition() {
 	if (score >= 50 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if (score >= 100) {
+	if (score >= 1000) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	} else {
