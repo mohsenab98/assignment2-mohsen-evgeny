@@ -223,26 +223,27 @@ function Draw() {
 	}
 }
 
+//updated the if conditions to suit the walls
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
 	if (x == 1) {
-		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
+		if (shape.j > 1 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
 		}
 	}
 	if (x == 2) {
-		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
+		if (shape.j < 10 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
 		}
 	}
 	if (x == 3) {
-		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
+		if (shape.i > 1 && board[shape.i - 1][shape.j] != 4) {
 			shape.i--;
 		}
 	}
 	if (x == 4) {
-		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
+		if (shape.i < 10 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
 		}
 	}

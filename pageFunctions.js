@@ -190,7 +190,7 @@ function monsterFunction(input){
 // add | minus for game time
 $(function() {
     $('.minus,.add').on('click', function() {
-      var $gameTime = $(this).closest('p').find('.gameTime'),
+      var $gameTime = $(this).closest('p').find('.time'),
         currentVal = parseInt($gameTime.val()),
         isAdd = $(this).hasClass('add');
       !isNaN(currentVal) && $gameTime.val(
@@ -231,4 +231,11 @@ $(function() {
     $(".game").css("visibility","visible");
     $(".game").css("position","absolute");
     document.getElementById("song").play(); 
-  };
+    document.getElementsByClassName("balls")[1].innerHTML = document.getElementsByClassName("balls")[0].innerHTML;
+    document.getElementsByClassName("time")[1].innerHTML = document.getElementsByClassName("time")[0].value;
+    document.getElementsByClassName("monsters")[1].innerHTML = document.getElementsByClassName("monsters")[0].innerHTML;
+    document.getElementsByClassName("sixty")[1].value = document.getElementsByClassName("sixty")[0].value;
+    document.getElementsByClassName("thirty")[1].value = document.getElementsByClassName("thirty")[0].value;
+    document.getElementsByClassName("ten")[1].value = document.getElementsByClassName("ten")[0].value;
+  
+};
