@@ -44,9 +44,9 @@ function Start() {
 
 	// food with scores 5: 60%, 15: 30%, 25: 10%
 	let ballArray = [1, 15, 25];
-	let ball_5_remain = (food_remain / 100) * 0.6
-	let ball_15_remain = (food_remain / 100) * 0.3
-	let ball_25_remain = (food_remain / 100) * 0.1
+	let ball_5_remain = food_remain * 0.6
+	let ball_15_remain = food_remain * 0.3
+	let ball_25_remain = food_remain * 0.1
 
 	start_time = new Date();
 	for (var i = 0; i < 12; i++) {
