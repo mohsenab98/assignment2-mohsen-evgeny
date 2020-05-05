@@ -2,6 +2,7 @@ var context;
 var shape = new Object();
 var board;
 var score;
+var loses;
 var pac_color;
 var start_time;
 var time_elapsed;
@@ -9,7 +10,6 @@ var interval;
 var x;
 var drawx;
 var drawy;
-
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
@@ -37,6 +37,7 @@ function Start() {
 	drawy = 2;
 	board = new Array();
 	score = 0;
+	loses = 0;
 	pac_color = "yellow";
 	var cnt = 100;
 	var food_remain = 50;
@@ -261,6 +262,7 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
+	lblLose.value = loses;
 	for (var i = 0; i < 12; i++) {
 		for (var j = 0; j < 12; j++) {
 			var center = new Object();
@@ -299,21 +301,21 @@ function Draw() {
 			else if (board[i][j] == 1) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = document.getElementById("sixtyPercent").value; //color
+				context.fillStyle = document.getElementsByClassName("sixty")[1].value; //color
 				context.fill();
 			} 
 			// score 15
 			else if (board[i][j] == 15) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = document.getElementById("thirtyPercent").value; //color
+				context.fillStyle = document.getElementsByClassName("thirty")[1].value; //color
 				context.fill();
 			}
 			// score 25
 			else if (board[i][j] == 25) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = document.getElementById("tenPercent").value; //color
+				context.fillStyle = document.getElementsByClassName("ten")[1].value; //color
 				context.fill();
 			}
 			else if (board[i][j] == 4) {

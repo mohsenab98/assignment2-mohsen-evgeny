@@ -154,10 +154,10 @@ input[type=range], h1, p{
   margin-left: 25%;
   }
 
-  #scoreLabel, #timeLabel{
+  #scoreLabel, #timeLabel, #loseLabel{
     margin-left: auto;
 }
 
-#lblScore, #lblTime{
+#lblScore, #lblTime, #lblLose{
   width: 60%;
 }
