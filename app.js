@@ -6,6 +6,9 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+var x;
+var drawx;
+var drawy;
 
 
 $(document).ready(function() {
@@ -22,7 +25,16 @@ $(document).ready(function() {
 // 5 - walls
 // 15 - food 15 scores
 // 25 - food 25 scores
+
+function newStart(){
+    Start();
+	// document.getElementById("song").play();
+	document.getElementById("song").currentTime = 0; // reset song
+};
+
 function Start() {
+	drawx = 0;
+	drawy = 2;
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
@@ -244,6 +256,7 @@ function GetKeyPressed() {
 	}
 }
 
+
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
@@ -255,7 +268,25 @@ function Draw() {
 			center.y = j * 60 + 30;
 			if (board[i][j] == 2) {
 				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				if(x == 1){
+					drawx = 1.45;
+					drawy = 1.25;
+				}else if(x == 2){
+					context.arc(center.x, center.y, 30,  0.65*Math.PI, 0.15*Math.PI); // half circle
+					drawx = 0.65;
+					drawy = 0.15;
+				}else if(x == 3){
+					context.arc(center.x, center.y, 30,  1.3*Math.PI, 0.8*Math.PI); // half circle
+					drawx = 1.3;
+					drawy = 0.8;
+				}else if(x == 4){
+					context.arc(center.x, center.y, 30,  0.15*Math.PI, 1.85*Math.PI); // half circle
+					drawx = 0.15;
+					drawy = 1.85;
+				}
+
+				context.arc(center.x, center.y, 30,  drawx*Math.PI, drawy*Math.PI); // half circle
+
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
@@ -303,23 +334,23 @@ function Draw() {
 //updated the if conditions to suit the walls
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
-	var x = GetKeyPressed();
-	if (x == 1) {
+	x = GetKeyPressed();
+	if (x == 1) { //up
 		if (shape.j > 1 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
 		}
 	}
-	if (x == 2) {
+	if (x == 2) { //down
 		if (shape.j < 10 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
 		}
 	}
-	if (x == 3) {
+	if (x == 3) { //left
 		if (shape.i > 1 && board[shape.i - 1][shape.j] != 4) {
 			shape.i--;
 		}
 	}
-	if (x == 4) {
+	if (x == 4) { //right
 		if (shape.i < 10 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
 		}
@@ -350,3 +381,5 @@ function UpdatePosition() {
 		Draw();
 	}
 }
+
+
