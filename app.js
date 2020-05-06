@@ -3,9 +3,12 @@ var shape = new Object();
 var board;
 var score;
 var loses;
+var maxLoses;
 var pac_color;
 var start_time;
 var time_elapsed;
+var maxTime;
+var timer;
 var interval;
 var x;
 var drawx = 0.15;
@@ -14,6 +17,7 @@ var monsters;
 var amountMonsters;
 var bonusIndexes;
 var indexBonus;
+var drug;
 var timeCounter = 0;
 
 $(document).ready(function() {
@@ -26,7 +30,7 @@ $(document).ready(function() {
 // 0 - empty
 // 1 - food 5 scores
 // 2 - pacman
-// 3 - 
+// 3 - drug
 // 4 - obstacles
 // 5 - walls
 // 15 - food 15 scores
@@ -35,7 +39,7 @@ $(document).ready(function() {
 function newStart(){
 	document.querySelector('#end').close();
     Start();
-	 document.getElementById("song").play();
+	document.getElementById("song").play();
 	document.getElementById("song").currentTime = 0; // reset song
 	document.getElementsByClassName("time")[1].innerHTML = 0;
 	time_elapsed = 0;
@@ -52,6 +56,8 @@ function Start() {
 	board = new Array();
 	score = 0;
 	loses = 0;
+	maxLoses = 5;
+	maxTime = parseInt(document.getElementsByClassName("time")[0].value);
 	pac_color = "yellow";
 	amountMonsters = document.getElementById('gameMonsters').value;
 	var cnt = 100;
@@ -160,6 +166,26 @@ function Start() {
 		food_remain--;
 	}
 
+	// drug
+	let indexesDrug = [findRandomEmptyCellDrug(board), findRandomEmptyCellDrug(board), findRandomEmptyCellDrug(board)];
+	drug = [ 
+			{i: indexesDrug[0][0], j: indexesDrug[0][1], draw: true },
+			{i: indexesDrug[1][0], j: indexesDrug[1][1], draw: true },
+			{i: indexesDrug[2][0], j: indexesDrug[2][1], draw: true },
+	];
+	board[indexesDrug[0][0]][indexesDrug[0][1]] = 3;
+	board[indexesDrug[1][0]][indexesDrug[1][1]] = 3;
+	board[indexesDrug[2][0]][indexesDrug[2][1]] = 3;
+
+	// drug
+	let indexesTimer = [findRandomEmptyCellTimer(board), findRandomEmptyCellTimer(board), findRandomEmptyCellTimer(board)];
+	timer = [ 
+			{i: indexesTimer[0][0], j: indexesTimer[0][1], draw: true },
+			{i: indexesTimer[1][0], j: indexesTimer[1][1], draw: true },
+			{i: indexesTimer[2][0], j: indexesTimer[2][1], draw: true },
+	];
+	
+
 
 	keysDown = {};
 	addEventListener(
@@ -187,6 +213,26 @@ function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * 9 + 1);
 	var j = Math.floor(Math.random() * 9 + 1);
 	while (board[i][j] != 0) {
+		i = Math.floor(Math.random() * 9 + 1);
+		j = Math.floor(Math.random() * 9 + 1);
+	}
+	return [i, j];
+}
+
+function findRandomEmptyCellDrug(board) {
+	var i = Math.floor(Math.random() * 9 + 1);
+	var j = Math.floor(Math.random() * 9 + 1);
+	while (board[i][j] != 1) {
+		i = Math.floor(Math.random() * 9 + 1);
+		j = Math.floor(Math.random() * 9 + 1);
+	}
+	return [i, j];
+}
+
+function findRandomEmptyCellTimer(board) {
+	var i = Math.floor(Math.random() * 9 + 1);
+	var j = Math.floor(Math.random() * 9 + 1);
+	while (board[i][j] != 1 || board[i][j] == 3) {
 		i = Math.floor(Math.random() * 9 + 1);
 		j = Math.floor(Math.random() * 9 + 1);
 	}
@@ -395,6 +441,26 @@ function Draw() {
 		context.drawImage(khaleesi, indexBonus.i * 60, indexBonus.j * 60);
 	}
 
+	// drug
+	for(let d = 0; d < drug.length; d++){
+		if(drug[d].draw){
+			let drugImg = document.createElement("img");
+			drugImg.setAttribute('src', "drug.png");
+			
+			context.drawImage(drugImg, drug[d].i * 60, drug[d].j * 60);
+		}
+	}
+
+	// timer
+	for(let t = 0; t < timer.length; t++){
+		if(timer[t].draw){
+			let timerImg = document.createElement("img");
+			timerImg.setAttribute('src', "timer.png");
+			
+			context.drawImage(timerImg, timer[t].i * 60, timer[t].j * 60);
+		}
+	}
+
 }
 
 
@@ -501,8 +567,7 @@ function UpdatePosition() {
 			score -= 10;
 			loses++;
 			
-			if(loses == 5){
-				// TODO:
+			if(loses == maxLoses){
 				document.getElementById("song").pause();
 				window.clearInterval(interval);
 				document.getElementById("gameResult").innerHTML = "Loser!";
@@ -537,6 +602,29 @@ function UpdatePosition() {
 		indexBonus.draw = false;
 	}
 
+	// eat drug
+	for(let d = 0; d < drug.length; d++){
+		if(shape.i == drug[d].i && shape.j == drug[d].j && drug[d].draw){
+			drug[d].draw = false;
+
+			if(loses > 0){
+				loses--;
+			}
+
+		}
+	}
+
+	// timer drug
+	for(let t = 0; t < timer.length; t++){
+		if(shape.i == timer[t].i && shape.j == timer[t].j && timer[t].draw){
+			timer[t].draw = false;
+
+			maxTime += 5;
+			document.getElementsByClassName("time")[1].innerHTML = maxTime;
+
+		}
+	}
+
 	// score
 	if (board[shape.i][shape.j] == 1) {
 		score = score + 5;
@@ -553,7 +641,7 @@ function UpdatePosition() {
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 
-	if(time_elapsed >=  document.getElementsByClassName("time")[0].value){
+	if(time_elapsed >=  maxTime){
 		document.getElementById("song").pause();
 		window.clearInterval(interval);
 		if(score < 100){
