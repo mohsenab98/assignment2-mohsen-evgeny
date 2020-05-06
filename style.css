@@ -1,103 +1,49 @@
-@font-face {
-  font-family: logoFont;
-  src: url(PAC-FONT.TTF);
-}
-
-@font-face {
-  font-family: myFont;
-  src: url(GALS.ttf);
-}
-
-
-/* header & footer  */
-#header{
-  font-family: logoFont;
-  text-emphasis: left;
-}
-
-.footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  /* background-color: red; */
-  color: black;
-  text-align: left;
-}
-
-
-.header {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 10%;
-  /* background-color: red; */
-  color: black;
-  text-align: center;
-}
-
-
 body{
+    /* text-align: center; */
+	/* background-image: url('wallpaper_home.jpg'); */
+	/* background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+    background-size: 100% 100%; */
     position: relative;
     margin-left:auto;
     margin-right:auto;
-    width: 70%;
-    font-family: myFont;
-    overflow: hidden; 
+    width: 600px;
+ 
+}
+img{
+    margin-left: 18%;
 }
 
-#gif{
-  margin-left: 25%;
-}
-
-/* divs */
 div{
     align-content: center;
 }
-
 div.page{
-    top: 25%;
-    bottom: 15%;
+    top: 10%;
     right: 0;
     width: 100%;
     height: 100%;
     visibility: hidden;
-    margin-left: 25%;
-    position: absolute;
-
-}
-
-.page.game {
-  display: flex;
-  margin-top: 7%;
-}
-
-div.settings{
-  overflow: scroll; 
-}
-
-div.game{
-  top: 10%;
 }
 
 
-#left {
-  flex: 0 0 25%;
-}
-
-#right {
-  flex: 1;
-}
-
-/* navigation bar */
 #nav ul{
     position: relative;
     float: left;
-    margin-left: 15%;
+    margin-left: 5%;
+    margin-top: 10%;
+
 }
 
 
+
+/* .button {
+    background-color: rgb(18, 87, 165); 
+    color: black; 
+    border: 10px solid rgb(0, 0, 0);
+    font-size: xxx-large;
+  } */
+  
   .button:hover,  input[type=submit]:hover{
     background-color: rgb(168, 39, 39);
     color: white;
@@ -115,14 +61,14 @@ div.game{
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 10px;
-    margin-left: 25%;
-    width: 50%;
+      margin-top: 10px;
+      width: 100%;
     }
 
-    input[type=text], input[type=email], input[type=date]{
+    input[type=text]{
     background-color: aliceblue(107, 107, 107);
-    width: 40%;
+
+    width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -135,29 +81,30 @@ div.game{
     
     label{
       margin-top: 10px;
-      margin-left: 25%;
     }
-
-  /* lable errors */
-  .error {
-    color: red;
-  }
-  
-  label.error {
-    display: inline;
-  }
-
   /* end of form css*/
 
-input[type=range], h1, p{
-  width: auto;
-  margin-left: 25%;
+
+
+/* header & footer  */
+    .footer {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: red;
+      color: white;
+      text-align: center;
   }
 
-  #scoreLabel, #timeLabel, #loseLabel{
-    margin-left: auto;
-}
+  .header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 5%;
+    background-color: red;
+    color: white;
+    text-align: center;
+  }
 
-#lblScore, #lblTime, #lblLose{
-  width: 60%;
-}
