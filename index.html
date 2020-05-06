@@ -180,11 +180,11 @@
 			<label>Change balls' color:</label>
 			<br/>
 			<label for="favcolor">60% of 5 points</label>
-			<input type="color" id="sixtyPercent" class="sixty" name="favcolor" value="#ff0000"><br><br>
+			<input type="color" id="sixtyPercent" class="sixty" name="favcolor" value="#f6b73c"><br><br>
 			<label for="favcolor">30% of 15 points</label>
 			<input type="color" id="thirtyPercent" class="thirty" name="favcolor" value="#ff0000"><br><br>
 			<label for="favcolor">10% of 25 points</label>
-			<input type="color" id="tenPercent" class="ten" name="favcolor" value="#ff0000"><br><br>
+			<input type="color" id="tenPercent" class="ten" name="favcolor" value="#0020ff"><br><br>
 				
 			<!-- time -->
 			<br/>
@@ -232,13 +232,18 @@
 					<label id="timeLabel" for="lblTime">TIME:</label>
 					<input id="lblTime" type="text" />
 				</div>
+				<div id="lose">
+					<label id="loseLabel" for="lblLose">LOSE:</label>
+					<input id="lblLose" type="text" />
+				</div>
 				<strong>Number of balls:  </strong> <span class="balls"></span><br/>
 				<strong>Time for the game:  </strong><span class="time"></span><br/>
 				<strong>Number of Monsters:  </strong><span class="monsters"></span><br/>
-				<strong>60% of 5 points:  </strong><input type="color"  class="sixty" name="favcolor" value="#ff0000"><br/>
-				<strong>30% of 15 points:  </strong><input type="color"  class="thirty" name="favcolor" value="#ff0000"><br/>
-				<strong>10% of 25 points:  </strong><input type="color" class="ten" name="favcolor" value="#ff0000"><br/>
-				
+				<strong>60% of 5 points:  </strong><input type="color" class="sixty" name="favcolor"><br/>
+				<strong>30% of 15 points:  </strong><input type="color" class="thirty" name="favcolor"><br/>
+				<strong>10% of 25 points:  </strong><input type="color" class="ten" name="favcolor"><br/>
+				<button  onclick="newStart();">Start New Game</button>
+
 			</div>
 
 

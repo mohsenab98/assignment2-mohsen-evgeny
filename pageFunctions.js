@@ -230,12 +230,12 @@ $(function() {
     $(".homepage").css("visibility","hidden");
     $(".game").css("visibility","visible");
     $(".game").css("position","absolute");
-    document.getElementById("song").play(); 
+    //document.getElementById("song").play(); 
     document.getElementsByClassName("balls")[1].innerHTML = document.getElementsByClassName("balls")[0].innerHTML;
     document.getElementsByClassName("time")[1].innerHTML = document.getElementsByClassName("time")[0].value;
     document.getElementsByClassName("monsters")[1].innerHTML = document.getElementsByClassName("monsters")[0].innerHTML;
     document.getElementsByClassName("sixty")[1].value = document.getElementsByClassName("sixty")[0].value;
     document.getElementsByClassName("thirty")[1].value = document.getElementsByClassName("thirty")[0].value;
     document.getElementsByClassName("ten")[1].value = document.getElementsByClassName("ten")[0].value;
-  
+    Start();
 };
