@@ -493,7 +493,7 @@ function UpdatePosition() {
 				// TODO:
 				document.getElementById("song").pause();
 				window.clearInterval(interval);
-				document.getElementById("gameResult").innerHTML = "Game over! You lose!";
+				document.getElementById("gameResult").innerHTML = "Loser!";
 				let dialog = document.querySelector('#end');
 				dialog.showModal();
 			}
@@ -536,7 +536,12 @@ function UpdatePosition() {
 	if(time_elapsed >=  document.getElementsByClassName("time")[0].value){
 		document.getElementById("song").pause();
 		window.clearInterval(interval);
-		document.getElementById("gameResult").innerHTML = "You ran out of time!";
+		if(score < 100){
+			document.getElementById("gameResult").innerHTML = "You are better than"+ score +"points!";
+
+		}else{
+			document.getElementById("gameResult").innerHTML = "Winner!!!";
+		}
         let dialog = document.querySelector('#end');
 		dialog.showModal();
 		//Game time
@@ -545,13 +550,6 @@ function UpdatePosition() {
 	if (score >= 50 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if (score >= 1000) {
-		document.getElementById("song").pause();
-		window.clearInterval(interval);
-		document.getElementById("gameResult").innerHTML = "Game completed! Well done!";
-        let dialog = document.querySelector('#end');
-		dialog.showModal();
-	} 
 	else {
 		Draw();
 	}
