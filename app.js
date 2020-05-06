@@ -11,6 +11,8 @@ var x;
 var drawx;
 var drawy;
 var monsters;
+var bonusIndexes;
+var indexBonus;
 var timeCounter = 0;
 
 $(document).ready(function() {
@@ -116,6 +118,15 @@ function Start() {
 		{i:10, j:10, img: 'red.png'}
 	]
 
+	// bonus
+	bonusIndexes = [
+		{i: 1, j:2, draw: true},
+		{i: 1, j:9, draw: true},
+		{i: 10, j:2, draw: true},
+		{i: 10, j:9, draw: true},
+	]
+	indexBonus = bonusIndexes[Math.floor(Math.random() * bonusIndexes.length)];
+
 	// board[1][1] += 100;
 	// board[1][10] += 100;
 	// board[10][1] += 100;
@@ -192,7 +203,7 @@ function getUpKey(){
 
 	document.querySelector('#upClose').onclick = function() {
 		dialog.close();
-		}
+	}
 }
 
 // DOWN
@@ -359,36 +370,18 @@ function Draw() {
 				}
 			}
 
-			/*
-			if(i == monster_1_Pos.i && j == monster_1_Pos.j){
-				let ghost = document.createElement("img");
-				ghost.setAttribute('src', 'monster.png');
-
-				context.drawImage(ghost, top.x, top.y);
-			}
-			else if(i == monster_2_Pos.i && j == monster_2_Pos.j){
-				let ghost = document.createElement("img");
-				ghost.setAttribute('src', 'monster.png');
-
-				context.drawImage(ghost, top.x, top.y);
-			}
-			else if(i == monster_3_Pos.i && j == monster_3_Pos.j){
-				let ghost = document.createElement("img");
-				ghost.setAttribute('src', 'monster.png');
-
-				context.drawImage(ghost, top.x, top.y);
-			}
-			else if(i == monster_4_Pos.i && j == monster_4_Pos.j){
-				let ghost = document.createElement("img");
-				ghost.setAttribute('src', 'monster.png');
-
-				context.drawImage(ghost, top.x, top.y);
-			}
-			*/
-
 		}
 		
 	}
+
+	// bonus khaleesi
+	if(indexBonus.draw){
+		let khaleesi = document.createElement("img");
+		khaleesi.setAttribute('src', "khaleesi.png");
+		
+		context.drawImage(khaleesi, indexBonus.i * 60, indexBonus.j * 60);
+	}
+
 }
 
 
@@ -419,8 +412,9 @@ function UpdatePosition() {
 		}
 	}
 
-	// Move monster
-	if (timeCounter % 5 == 0){
+	// Move monster and bonus
+	if (timeCounter % 5 == 0){ // speed of changing place
+		// Move monster
 		for (var n = 0; n < 4; n++){
 		
 			let newI;
@@ -457,17 +451,37 @@ function UpdatePosition() {
 				monsters[n].j = newJ;
 			}
 		}
+		
+
 	}
 
+	if (timeCounter % 10 == 0){ // speed of changing place
+		// Move bonus
+		if(indexBonus.draw){
+			let newI_Bonus;
+			let newJ_Bonus;
+
+			while(true){
+				newI_Bonus = Math.floor(Math.random() * 10) + 1;
+				newJ_Bonus = Math.floor(Math.random() * 10) + 1;
+
+				if(board[newI_Bonus][newJ_Bonus] != 4){
+					break;
+				}
+			}
+
+			indexBonus.i = newI_Bonus;
+			indexBonus.j = newJ_Bonus;
+		}
+		else{
+			indexBonus.i = null;
+			indexBonus.j = null;
+		}
+	}
 
 
 
 	// Check pacman-monster collision
-	/*
-	if (board[shape.i][shape.j] > 100) {
-		console.log("BOOM!")
-	}
-	*/
 	for (var n = 0; n < 4; n++){
 		if(shape.i == monsters[n].i && shape.j == monsters[n].j){
 			console.log("BOOM!");
@@ -480,6 +494,8 @@ function UpdatePosition() {
 			}
 
 			let i; let j;
+			
+			// random recure pac
 			while(true){
 				let isMonster = false;
 				i = Math.floor(Math.random() * 10) + 1;
@@ -489,13 +505,19 @@ function UpdatePosition() {
 						isMonster = true;
 					}
 				}
-				if(board[i][j] != 4 && !isMonster){
+				if(board[i][j] != 4 && board[i][j] != 1 && board[i][j] != 15 && board[i][j] != 25 && !isMonster && indexBonus.i != shape.i && indexBonus.j != shape.j){
 					shape.i = i;
 					shape.j = j;
 					break;
 				}
 			}
 		}
+	}
+
+	// Check pacman-bonus collision
+	if(shape.i == indexBonus.i && shape.j == indexBonus.j){
+		score += 50;
+		indexBonus.draw = false;
 	}
 
 	// score
