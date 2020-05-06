@@ -52,6 +52,7 @@ function logPageFunction() {
 };
 
 function homePageFunction() {
+    document.querySelector('#end').close();
     document.getElementById('homeLink').click();
 };
 
@@ -239,3 +240,4 @@ $(function() {
     document.getElementsByClassName("ten")[1].value = document.getElementsByClassName("ten")[0].value;
     Start();
 };
+

@@ -210,7 +210,7 @@
 			<button id="random" onclick="randomSettings();">Random Settings</button>
 
 			<button  onclick="startGame();">Start the Game</button>
-			
+
 		</div>
 
 
@@ -243,6 +243,7 @@
 				<strong>30% of 15 points:  </strong><input type="color" class="thirty" name="favcolor"><br/>
 				<strong>10% of 25 points:  </strong><input type="color" class="ten" name="favcolor"><br/>
 				<button  onclick="newStart();">Start New Game</button>
+				<button  onclick="stopGame();">Stop the Game</button>
 
 			</div>
 
@@ -252,15 +253,25 @@
 				<div id="game">
 					<canvas id="canvas" height="700" width="700"></canvas>
 				</div>
+				<dialog class="keysDialog" id="end" >
+					<h1>Game Over</h1>
+					<strong id="gameResult"> </strong>
+					<button onclick="newStart();">New Game</button>
+					<button onclick="homePageFunction()">Home</button>
+				</dialog>
 			</div>
 		  </div>
 
+
+
+		  </div>
 		<!-- footer -->
 		<div class="footer">
 			Posted by: Hege Refsnes<br/>
 			Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.
 		  </div>
 		
+
 
 		
 	</body>
