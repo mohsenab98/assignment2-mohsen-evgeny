@@ -16,6 +16,7 @@ var timeCounter = 0;
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	//Start();
+	
 });
 
 // board[i][j]:
@@ -29,11 +30,20 @@ $(document).ready(function() {
 // 25 - food 25 scores
 
 function newStart(){
+	document.querySelector('#end').close();
     Start();
-	// document.getElementById("song").play();
+	 document.getElementById("song").play();
 	document.getElementById("song").currentTime = 0; // reset song
+	document.getElementsByClassName("time")[1].innerHTML = 0;
+	time_elapsed = 0;
 };
-
+function stopGame(){
+	document.querySelector('#end').close();
+	window.clearInterval(interval);
+	document.getElementById("song").pause(); // reset song
+	document.getElementsByClassName("time")[1].innerHTML = 0;
+	time_elapsed = 0;
+};
 function Start() {
 	drawx = 0;
 	drawy = 2;
@@ -160,6 +170,10 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 250);
+
+
+	
+
 }
 
 function findRandomEmptyCell(board) {
@@ -394,6 +408,7 @@ function Draw() {
 
 //updated the if conditions to suit the walls
 function UpdatePosition() {
+	
 	timeCounter++;
 
 	board[shape.i][shape.j] = 0;
@@ -476,7 +491,11 @@ function UpdatePosition() {
 			
 			if(loses == 5){
 				// TODO:
-				alert("Loser");
+				document.getElementById("song").pause();
+				window.clearInterval(interval);
+				document.getElementById("gameResult").innerHTML = "Game over! You lose!";
+				let dialog = document.querySelector('#end');
+				dialog.showModal();
 			}
 
 			let i; let j;
@@ -513,13 +532,27 @@ function UpdatePosition() {
 
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
+
+	if(time_elapsed >=  document.getElementsByClassName("time")[0].value){
+		document.getElementById("song").pause();
+		window.clearInterval(interval);
+		document.getElementById("gameResult").innerHTML = "You ran out of time!";
+        let dialog = document.querySelector('#end');
+		dialog.showModal();
+		//Game time
+	}
+
 	if (score >= 50 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
 	if (score >= 1000) {
+		document.getElementById("song").pause();
 		window.clearInterval(interval);
-		window.alert("Game completed");
-	} else {
+		document.getElementById("gameResult").innerHTML = "Game completed! Well done!";
+        let dialog = document.querySelector('#end');
+		dialog.showModal();
+	} 
+	else {
 		Draw();
 	}
 }
