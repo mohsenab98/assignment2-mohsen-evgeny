@@ -15,6 +15,7 @@ var drawx = 0.15;
 var drawy = 1.85;
 var monsters;
 var amountMonsters;
+var amountCircles;
 var bonusIndexes;
 var indexBonus;
 var drug;
@@ -41,18 +42,19 @@ function newStart(){
     Start();
 	document.getElementById("song").play();
 	document.getElementById("song").currentTime = 0; // reset song
-	document.getElementsByClassName("time")[1].innerHTML = 0;
+	// document.getElementsByClassName("time")[1].innerHTML = 0;
 	time_elapsed = 0;
 };
 function stopGame(){
 	document.querySelector('#end').close();
 	window.clearInterval(interval);
 	document.getElementById("song").pause(); // reset song
-	document.getElementsByClassName("time")[1].innerHTML = 0;
+	// document.getElementsByClassName("time")[1].innerHTML = 0;
+	document.getElementsByClassName("time")[1].disabled = true;
 	time_elapsed = 0;
 };
 function Start() {
-	
+	amountCircles = document.getElementsByClassName("balls")[1].innerHTML;
 	board = new Array();
 	score = 0;
 	loses = 0;
@@ -202,7 +204,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
+	interval = setInterval(UpdatePosition, 150);
 
 
 	
@@ -628,12 +630,15 @@ function UpdatePosition() {
 	// score
 	if (board[shape.i][shape.j] == 1) {
 		score = score + 5;
+		amountCircles--;
 	}
 	else if(board[shape.i][shape.j] == 15){
 		score = score + 15;
+		amountCircles--;
 	}
 	else if(board[shape.i][shape.j] == 25){
 		score = score + 25;
+		amountCircles--;
 	}
 
 	board[shape.i][shape.j] = 2;
@@ -641,9 +646,10 @@ function UpdatePosition() {
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 
-	if(time_elapsed >=  maxTime){
+	if(time_elapsed >=  maxTime ){
 		document.getElementById("song").pause();
 		window.clearInterval(interval);
+		document.getElementById("lblTime").value = document.getElementsByClassName("time")[0].value;
 		if(score < 100){
 			document.getElementById("gameResult").innerHTML = "You are better than "+ score +" points!";
 
