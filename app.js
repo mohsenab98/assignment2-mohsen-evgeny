@@ -11,6 +11,7 @@ var x;
 var drawx;
 var drawy;
 var monsters;
+var amountMonsters;
 var bonusIndexes;
 var indexBonus;
 var timeCounter = 0;
@@ -43,8 +44,9 @@ function Start() {
 	score = 0;
 	loses = 0;
 	pac_color = "yellow";
+	amountMonsters = document.getElementById('gameMonsters').value;
 	var cnt = 100;
-	var food_remain = 50;
+	var food_remain = document.getElementById('gameBalls').value;
 	var pacman_remain = 1;
 
 	// food with scores 5: 60%, 15: 30%, 25: 10%
@@ -127,11 +129,6 @@ function Start() {
 	]
 	indexBonus = bonusIndexes[Math.floor(Math.random() * bonusIndexes.length)];
 
-	// board[1][1] += 100;
-	// board[1][10] += 100;
-	// board[10][1] += 100;
-	// board[10][10] += 100;
-	
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		// choose the ball by per cent
@@ -361,7 +358,7 @@ function Draw() {
 
 
 			// monsters
-			for (var n = 0; n < 4; n++){
+			for (var n = 0; n < amountMonsters; n++){
 				if(i == monsters[n].i && j == monsters[n].j){
 					let ghost = document.createElement("img");
 					ghost.setAttribute('src', monsters[n].img);
@@ -387,6 +384,7 @@ function Draw() {
 
 //updated the if conditions to suit the walls
 function UpdatePosition() {
+	
 	timeCounter++;
 
 	board[shape.i][shape.j] = 0;
@@ -415,7 +413,7 @@ function UpdatePosition() {
 	// Move monster and bonus
 	if (timeCounter % 5 == 0){ // speed of changing place
 		// Move monster
-		for (var n = 0; n < 4; n++){
+		for (var n = 0; n < amountMonsters; n++){
 		
 			let newI;
 			if(monsters[n].i < shape.i){
@@ -451,11 +449,9 @@ function UpdatePosition() {
 				monsters[n].j = newJ;
 			}
 		}
+
+
 		
-
-	}
-
-	if (timeCounter % 10 == 0){ // speed of changing place
 		// Move bonus
 		if(indexBonus.draw){
 			let newI_Bonus;
@@ -474,15 +470,16 @@ function UpdatePosition() {
 			indexBonus.j = newJ_Bonus;
 		}
 		else{
-			indexBonus.i = null;
-			indexBonus.j = null;
+			indexBonus.i = 0;
+			indexBonus.j = 0;
 		}
+		
+		
+
 	}
 
-
-
 	// Check pacman-monster collision
-	for (var n = 0; n < 4; n++){
+	for (var n = 0; n < amountMonsters; n++){
 		if(shape.i == monsters[n].i && shape.j == monsters[n].j){
 			console.log("BOOM!");
 			score -= 10;
@@ -494,18 +491,18 @@ function UpdatePosition() {
 			}
 
 			let i; let j;
-			
+			let count = 0
 			// random recure pac
 			while(true){
 				let isMonster = false;
 				i = Math.floor(Math.random() * 10) + 1;
 				j = Math.floor(Math.random() * 10) + 1;
-				for (var n = 0; n < 4; n++){
-					if(i == monsters[n].i || j == monsters[n].j){
+				for (var n = 0; n < amountMonsters; n++){
+					if(i == monsters[n].i && j == monsters[n].j){
 						isMonster = true;
 					}
 				}
-				if(board[i][j] != 4 && board[i][j] != 1 && board[i][j] != 15 && board[i][j] != 25 && !isMonster && indexBonus.i != shape.i && indexBonus.j != shape.j){
+				if(board[i][j] != 4 && !isMonster){
 					shape.i = i;
 					shape.j = j;
 					break;
@@ -545,5 +542,3 @@ function UpdatePosition() {
 		Draw();
 	}
 }
-
-
