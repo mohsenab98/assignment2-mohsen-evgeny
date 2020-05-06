@@ -8,8 +8,8 @@ var start_time;
 var time_elapsed;
 var interval;
 var x;
-var drawx;
-var drawy;
+var drawx = 0.15;
+var drawy = 1.85;
 var monsters;
 var amountMonsters;
 var bonusIndexes;
@@ -48,8 +48,7 @@ function stopGame(){
 	time_elapsed = 0;
 };
 function Start() {
-	drawx = 0;
-	drawy = 2;
+	
 	board = new Array();
 	score = 0;
 	loses = 0;
@@ -70,19 +69,19 @@ function Start() {
 		board[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 12; j++) {
-			if (
-				(i == 3 && j == 3) ||
-				(i == 3 && j == 4) ||
-				(i == 3 && j == 5) ||
-				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
-			) {
-				board[i][j] = 4; // obstacles
-			} 
-			else if(i == 0 || j == 0 || i == 11 || j == 11){  // walls
+			if(i == 0 || j == 0 || i == 11 || j == 11){  // walls
 				board[i][j] = 5; // walls
 			}
-			else {
+			else if (
+				// (i == 3 && j == 3) ||
+				// (i == 3 && j == 4) ||
+				// (i == 3 && j == 5) ||
+				// (i == 6 && j == 1) ||
+				// (i == 6 && j == 2)
+				2 + Math.floor(Math.random() * 10) == i 
+			) {
+				board[i][j] = 4; // obstacles
+			} else {
 				var randomNum = Math.random();
 				var ball;
 
@@ -313,16 +312,18 @@ function Draw() {
 				if(x == 1){
 					drawx = 1.45;
 					drawy = 1.25;
+					//context.arc(center.x, center.y, 30,  1.65*Math.PI, 1.35*Math.PI); // half circle
+
 				}else if(x == 2){
-					context.arc(center.x, center.y, 30,  0.65*Math.PI, 0.15*Math.PI); // half circle
+					//context.arc(center.x, center.y, 30,  0.65*Math.PI, 0.35*Math.PI); // half circle
 					drawx = 0.65;
 					drawy = 0.15;
 				}else if(x == 3){
-					context.arc(center.x, center.y, 30,  1.3*Math.PI, 0.8*Math.PI); // half circle
+					//context.arc(center.x, center.y, 30,  1.15*Math.PI, 0.35*Math.PI); // half circle
 					drawx = 1.3;
 					drawy = 0.8;
 				}else if(x == 4){
-					context.arc(center.x, center.y, 30,  0.15*Math.PI, 1.85*Math.PI); // half circle
+					//context.arc(center.x, center.y, 30,  0.85*Math.PI, 1.15*Math.PI); // half circle
 					drawx = 0.15;
 					drawy = 1.85;
 				}
@@ -336,6 +337,7 @@ function Draw() {
 				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
+
 			} 
 			// score 5
 			else if (board[i][j] == 1) {
@@ -555,7 +557,7 @@ function UpdatePosition() {
 		document.getElementById("song").pause();
 		window.clearInterval(interval);
 		if(score < 100){
-			document.getElementById("gameResult").innerHTML = "You are better than"+ score +"points!";
+			document.getElementById("gameResult").innerHTML = "You are better than "+ score +" points!";
 
 		}else{
 			document.getElementById("gameResult").innerHTML = "Winner!!!";
