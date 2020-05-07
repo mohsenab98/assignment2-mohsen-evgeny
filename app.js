@@ -578,7 +578,6 @@ function UpdatePosition() {
 			}
 
 			let i; let j;
-			let count = 0
 			// random recure pac
 			while(true){
 				let isMonster = false;
@@ -595,6 +594,7 @@ function UpdatePosition() {
 					break;
 				}
 			}
+			
 		}
 	}
 
@@ -663,6 +663,9 @@ function UpdatePosition() {
 
 	if (score >= 50 && time_elapsed <= 10) {
 		pac_color = "green";
+	}
+	else if(score >= 100){
+		document.getElementById("gameResult").innerHTML = "Winner!!!";
 	}
 	else {
 		Draw();

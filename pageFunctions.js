@@ -14,9 +14,11 @@ var database = [
     $('#homeLink').click(function() {
         $(".page").css("visibility","hidden");
         $(".homepage").css("visibility","visible");
+        document.getElementById("song").pause();
     });
 
     $('#registerLink').click(function() {
+        document.getElementById("song").pause();
         $(".page").css("visibility","hidden");
         $(".homepage").css("visibility","hidden");
         $(".b").css("visibility","visible");
@@ -25,6 +27,7 @@ var database = [
     });
 
     $('#loginLink').click(function() {
+        document.getElementById("song").pause();
         $(".page").css("visibility","hidden");
         $(".homepage").css("visibility","hidden");
         $(".c").css("visibility","visible");
@@ -33,6 +36,7 @@ var database = [
     });
 
     $('#aboutLink').click(function() {
+        document.getElementById("song").pause();
         $(".page").css("visibility","hidden");
         $(".homepage").css("visibility","visible");
         $(".d").css("visibility","visible");    
@@ -231,7 +235,7 @@ $(function() {
     $(".homepage").css("visibility","hidden");
     $(".game").css("visibility","visible");
     $(".game").css("position","absolute");
-    //document.getElementById("song").play(); 
+    document.getElementById("song").play(); 
     document.getElementsByClassName("balls")[1].innerHTML = document.getElementsByClassName("balls")[0].innerHTML;
     document.getElementsByClassName("time")[1].innerHTML = document.getElementsByClassName("time")[0].value;
     document.getElementsByClassName("monsters")[1].innerHTML = document.getElementsByClassName("monsters")[0].innerHTML;

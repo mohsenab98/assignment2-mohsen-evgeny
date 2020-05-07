@@ -161,3 +161,8 @@ input[type=range], h1, p{
 #lblScore, #lblTime, #lblLose{
   width: 60%;
 }
+
+
+dialog{
+  text-align: center;
+}

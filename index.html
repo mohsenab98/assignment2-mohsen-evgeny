@@ -129,7 +129,8 @@
 			<dialog class="keysDialog" id ="upDialog">
 				<p>Press key for UP:</p>
 				<span class="keysInDialog" id="upSpan"></span>
-				<button id="upClose">Close</button>
+				<br/>
+				<button id="upClose">Submit</button>
 			</dialog>
 
 			<br/>
@@ -137,10 +138,11 @@
 
 			<!-- DOWN -->
 			<button id="downButton" onclick="getDownKey()">Choose DOWN</button>
-			<dialog id ="downDialog">
+			<dialog class="keysDialog" id ="downDialog">
 				<p>Press key for DOWN:</p>
 				<span class="keysInDialog" id="downSpan"></span>
-				<button id="downClose">Close</button>
+				<br/>
+				<button id="downClose">Submit</button>
 			</dialog>
 
 			<br/>
@@ -148,10 +150,11 @@
 
 			<!-- LEFT -->
 			<button id="leftButton" onclick="getLeftKey()">Choose LEFT</button>
-			<dialog id ="leftDialog">
+			<dialog class="keysDialog" id ="leftDialog">
 				<p>Press key for LEFT:</p>
 				<span class="keysInDialog" id="leftSpan"></span>
-				<button id="leftClose">Close</button>
+				<br/>
+				<button id="leftClose">Submit</button>
 			</dialog>
 
 			<br/>
@@ -159,10 +162,11 @@
 
 			<!-- RIGHT -->
 			<button id="rightButton" onclick="getRightKey()">Choose RIGHT</button>
-			<dialog id ="rightDialog">
+			<dialog class="keysDialog" id ="rightDialog">
 				<p>Press key for RIGHT:</p>
 				<span text-align="center" class="keysInDialog" id="rightSpan"></span>
-				<button id="rightClose">Close</button>
+				<br/>
+				<button id="rightClose">Submit</button>
 			</dialog>
 			  
 			<br/>
@@ -253,7 +257,7 @@
 				<div id="game">
 					<canvas id="canvas" height="700" width="700"></canvas>
 				</div>
-				<dialog class="keysDialog" id="end" >
+				<dialog id="end" >
 					<h1>Game Over</h1>
 					<strong id="gameResult"> </strong><br/>
 					<button onclick="newStart();">New Game</button>
