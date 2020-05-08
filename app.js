@@ -40,12 +40,7 @@ $(document).ready(function() {
 function startGame(){
 	document.querySelector('#newGameButton').disabled = true;
 
-	//document.querySelector('#newGameButton').disabled = true;
 	document.querySelector('#end').close();
-    //Start();
-	//document.getElementById("song").play();
-
-	// document.getElementsByClassName("time")[1].innerHTML = 0;
 
     $(".page").css("visibility","hidden");
     $(".homepage").css("visibility","hidden");
@@ -58,8 +53,8 @@ function startGame(){
     document.getElementsByClassName("thirty")[1].value = document.getElementsByClassName("thirty")[0].value;
 	document.getElementsByClassName("ten")[1].value = document.getElementsByClassName("ten")[0].value;
 	
-	//document.getElementById("song").currentTime = 0; // reset song
-	//document.getElementById("song").play(); 
+	document.getElementById("song").currentTime = 0; // reset song
+	document.getElementById("song").play(); 
 	
 	Start();
 
@@ -70,9 +65,18 @@ function startGame(){
 function stopGame(){
 	document.querySelector('#stopGameButton').disabled = true;
 
+	clearInterval(interval);
+	interval = null;
+
+	document.querySelector('#end').close();
+	document.getElementById("song").pause(); // reset song
+
+	document.getElementsByClassName("time")[1].disabled = true;
+
 	document.querySelector('#newGameButton').disabled = false;
 }
 
+/*
 function stopGame(){
 	document.querySelector('#end').close();
 	clearInterval(interval);
@@ -82,6 +86,8 @@ function stopGame(){
 	time_elapsed = 0;
 	document.querySelector('#newGameButton').disabled = false;
 };
+*/
+
 function Start() {
 	amountCircles = document.getElementsByClassName("balls")[1].innerHTML;
 	board = new Array();
@@ -92,7 +98,7 @@ function Start() {
 	maxTime = parseInt(document.getElementsByClassName("time")[0].value);
 	pac_color = "yellow";
 	amountMonsters = document.getElementById('gameMonsters').value;
-	var cnt = 100;
+	var cnt = 99;
 	var food_remain = document.getElementById('gameBalls').value;
 	var pacman_remain = 1;
 
@@ -116,7 +122,8 @@ function Start() {
 				// (i == 3 && j == 5) ||
 				// (i == 6 && j == 1) ||
 				// (i == 6 && j == 2)
-				2 + Math.floor(Math.random() * 10) == i 
+				2 + Math.floor(Math.random() * 10) == i && 
+				cnt - food_remain > 1
 			) {
 				board[i][j] = 4; // obstacles
 				cnt--;
@@ -146,13 +153,15 @@ function Start() {
 
 					board[i][j] = ball;
 				} 
-				
+				/*
 				else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;
 					board[i][j] = 2; // pac
-				} else {
+				} 
+				*/
+				else {
 					board[i][j] = 0; // empty
 				}
 				cnt--;
@@ -218,6 +227,25 @@ function Start() {
 			{i: indexesTimer[2][0], j: indexesTimer[2][1], draw: true },
 	];
 	
+	// Place pacman
+	shape.i = 0;
+	shape.j = 0;
+	
+	while(shape.i == 0 && shape.j == 0)	{
+		let i = Math.floor(Math.random() * 9 + 1);
+		let j = Math.floor(Math.random() * 9 + 1);
+
+		// Monsters
+		for (let n = 0; n < amountMonsters; n++){
+			if(i == monsters[n].i && j == monsters[n].j){
+				continue;
+			}
+		}
+
+		board[i][j] = 0;
+		shape.i = i;
+		shape.j = j;
+	}
 
 
 	keysDown = {};
@@ -235,10 +263,8 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
 
-
-	
+	interval = setInterval(UpdatePosition, 100);
 
 }
 
@@ -608,8 +634,7 @@ function UpdatePosition() {
 			loses++;
 			
 			if(loses == maxLoses){
-				document.getElementById("song").pause();
-				window.clearInterval(interval);
+				stopGame();
 				document.getElementById("gameResult").innerHTML = "Loser!";
 				let dialog = document.querySelector('#end');
 				dialog.showModal();
@@ -685,8 +710,7 @@ function UpdatePosition() {
 	time_elapsed = (currentTime - start_time) / 1000;
 
 	if(time_elapsed >=  maxTime ){
-		document.getElementById("song").pause();
-		window.clearInterval(interval);
+		stopGame();
 		document.getElementById("lblTime").value = document.getElementsByClassName("time")[0].value;
 		if(score < 100){
 			document.getElementById("gameResult").innerHTML = "You are better than "+ score +" points!";
@@ -696,24 +720,24 @@ function UpdatePosition() {
 		}
         let dialog = document.querySelector('#end');
 		dialog.showModal();
-		//Game time
-	}
-
-	if(score >= 100){
-		clearInterval(interval);
-		document.getElementById("gameResult").innerHTML = "Winner!!!";
-		stopGame();
-		UpdatePositionCnt--;
-		return;
 	}
 
 	if (score >= 50 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	// else {
-		
-	// }
+
 	Draw();
+
+	if(score >= 100){
+		stopGame();
+
+		document.getElementById("gameResult").innerHTML = "Winner!!!";
+		let dialog = document.querySelector('#end');
+		dialog.showModal();
+		
+		UpdatePositionCnt--;
+		return;
+	}
 
 	UpdatePositionCnt--;
 	console.log(UpdatePositionCnt);
