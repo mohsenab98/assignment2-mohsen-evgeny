@@ -127,7 +127,7 @@
 			<!-- UP -->
 			<button id="upButton" onclick="getUpKey()">Choose UP</button>
 			<dialog class="keysDialog" id ="upDialog">
-				<p>Press key for UP:</p>
+				<p class="keyP">Press key for UP:</p>
 				<span class="keysInDialog" id="upSpan"></span>
 				<br/>
 				<button id="upClose">Submit</button>
@@ -139,7 +139,7 @@
 			<!-- DOWN -->
 			<button id="downButton" onclick="getDownKey()">Choose DOWN</button>
 			<dialog class="keysDialog" id ="downDialog">
-				<p>Press key for DOWN:</p>
+				<p class="keyP">Press key for DOWN:</p>
 				<span class="keysInDialog" id="downSpan"></span>
 				<br/>
 				<button id="downClose">Submit</button>
@@ -151,7 +151,7 @@
 			<!-- LEFT -->
 			<button id="leftButton" onclick="getLeftKey()">Choose LEFT</button>
 			<dialog class="keysDialog" id ="leftDialog">
-				<p>Press key for LEFT:</p>
+				<p class="keyP">Press key for LEFT:</p>
 				<span class="keysInDialog" id="leftSpan"></span>
 				<br/>
 				<button id="leftClose">Submit</button>
@@ -163,7 +163,7 @@
 			<!-- RIGHT -->
 			<button id="rightButton" onclick="getRightKey()">Choose RIGHT</button>
 			<dialog class="keysDialog" id ="rightDialog">
-				<p>Press key for RIGHT:</p>
+				<p class="keyP">Press key for RIGHT:</p>
 				<span text-align="center" class="keysInDialog" id="rightSpan"></span>
 				<br/>
 				<button id="rightClose">Submit</button>
@@ -258,8 +258,8 @@
 					<canvas id="canvas" height="700" width="700"></canvas>
 				</div>
 				<dialog id="end" >
-					<h1>Game Over</h1>
 					<strong id="gameResult"> </strong><br/>
+					<!-- <h3>Game Over</h3> -->
 					<button onclick="startGame();">New Game</button>
 					<button onclick="homePageFunction()">Home</button>
 				</dialog>

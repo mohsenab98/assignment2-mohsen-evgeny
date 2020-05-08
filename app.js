@@ -15,7 +15,7 @@ var drawx = 0.15;
 var drawy = 1.85;
 var monsters;
 var amountMonsters;
-var amountCircles;
+var amountCircles = 0;
 var bonusIndexes;
 var indexBonus;
 var drug;
@@ -89,7 +89,6 @@ function stopGame(){
 */
 
 function Start() {
-	amountCircles = document.getElementsByClassName("balls")[1].innerHTML;
 	board = new Array();
 	time_elapsed = 0;
 	score = 0;
@@ -97,17 +96,16 @@ function Start() {
 	maxLoses = 5;
 	maxTime = parseInt(document.getElementsByClassName("time")[0].value);
 	pac_color = "yellow";
-	amountMonsters = document.getElementById('gameMonsters').value;
+	amountMonsters = document.getElementById('rangeMonster').innerHTML;
 	var cnt = 99;
 	var food_remain = document.getElementById('gameBalls').value;
 	var pacman_remain = 1;
 
 	// food with scores 5: 60%, 15: 30%, 25: 10%
 	let ballArray = [1, 15, 25];
-	let ball_5_remain = food_remain * 0.6
-	let ball_15_remain = food_remain * 0.3
-	let ball_25_remain = food_remain * 0.1
-
+	let ball_5_remain = food_remain * 0.6;
+	let ball_15_remain = food_remain * 0.3;
+	let ball_25_remain = food_remain * 0.1;
 	start_time = new Date();
 	for (var i = 0; i < 12; i++) {
 		board[i] = new Array();
@@ -162,6 +160,7 @@ function Start() {
 				} 
 				*/
 				else {
+					
 					board[i][j] = 0; // empty
 				}
 				cnt--;
@@ -208,6 +207,8 @@ function Start() {
 		food_remain--;
 	}
 
+
+
 	// drug
 	let indexesDrug = [findRandomEmptyCellDrug(board), findRandomEmptyCellDrug(board), findRandomEmptyCellDrug(board)];
 	drug = [ 
@@ -241,7 +242,7 @@ function Start() {
 				continue;
 			}
 		}
-
+		
 		board[i][j] = 0;
 		shape.i = i;
 		shape.j = j;
@@ -398,6 +399,7 @@ function GetKeyPressed() {
 
 
 function Draw() {
+	amountCircles = 0;
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_elapsed;
@@ -446,6 +448,7 @@ function Draw() {
 			} 
 			// score 5
 			else if (board[i][j] == 1) {
+				amountCircles++;
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = document.getElementsByClassName("sixty")[1].value; //color
@@ -453,6 +456,7 @@ function Draw() {
 			} 
 			// score 15
 			else if (board[i][j] == 15) {
+				amountCircles++;
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = document.getElementsByClassName("thirty")[1].value; //color
@@ -460,6 +464,7 @@ function Draw() {
 			}
 			// score 25
 			else if (board[i][j] == 25) {
+				amountCircles++;
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = document.getElementsByClassName("ten")[1].value; //color
@@ -626,6 +631,7 @@ function UpdatePosition() {
 
 	}
 
+	
 	// Check pacman-monster collision
 	for (var n = 0; n < amountMonsters; n++){
 		if(shape.i == monsters[n].i && shape.j == monsters[n].j){
@@ -693,15 +699,12 @@ function UpdatePosition() {
 	// score
 	if (board[shape.i][shape.j] == 1) {
 		score = score + 5;
-		amountCircles--;
 	}
 	else if(board[shape.i][shape.j] == 15){
 		score = score + 15;
-		amountCircles--;
 	}
 	else if(board[shape.i][shape.j] == 25){
 		score = score + 25;
-		amountCircles--;
 	}
 
 	board[shape.i][shape.j] = 2;
@@ -709,7 +712,14 @@ function UpdatePosition() {
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 
-	if(time_elapsed >=  maxTime ){
+	
+
+	if (score >= 50 && time_elapsed <= 10) {
+		pac_color = "green";
+	}
+
+	Draw();
+	if(time_elapsed >=  maxTime || amountCircles == 0){
 		stopGame();
 		document.getElementById("lblTime").value = document.getElementsByClassName("time")[0].value;
 		if(score < 100){
@@ -721,23 +731,7 @@ function UpdatePosition() {
         let dialog = document.querySelector('#end');
 		dialog.showModal();
 	}
-
-	if (score >= 50 && time_elapsed <= 10) {
-		pac_color = "green";
-	}
-
-	Draw();
-
-	if(score >= 100){
-		stopGame();
-
-		document.getElementById("gameResult").innerHTML = "Winner!!!";
-		let dialog = document.querySelector('#end');
-		dialog.showModal();
-		
-		UpdatePositionCnt--;
-		return;
-	}
+	
 
 	UpdatePositionCnt--;
 	console.log(UpdatePositionCnt);

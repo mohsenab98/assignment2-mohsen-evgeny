@@ -164,6 +164,21 @@ input[type=range], h1, p{
 }
 
 
+button:disabled {
+  background: #dddddd;
+}
+p.keyP{
+  left: 0;
+  
+}
 dialog{
-  text-align: center;
+  width: 20%;
+}
+span.keysInDialog{
+  margin-left: 50%;
+}
+
+#gameResult{
+  margin-left: 35%;
+  font-size: xx-large;
 }
