@@ -37,25 +37,55 @@ $(document).ready(function() {
 // 15 - food 15 scores
 // 25 - food 25 scores
 
-function newStart(){
+function startGame(){
+	document.querySelector('#newGameButton').disabled = true;
+
+	//document.querySelector('#newGameButton').disabled = true;
 	document.querySelector('#end').close();
-    Start();
-	document.getElementById("song").play();
-	document.getElementById("song").currentTime = 0; // reset song
+    //Start();
+	//document.getElementById("song").play();
+
 	// document.getElementsByClassName("time")[1].innerHTML = 0;
-	time_elapsed = 0;
+
+    $(".page").css("visibility","hidden");
+    $(".homepage").css("visibility","hidden");
+    $(".game").css("visibility","visible");
+    $(".game").css("position","absolute");
+    document.getElementsByClassName("balls")[1].innerHTML = document.getElementsByClassName("balls")[0].innerHTML;
+    document.getElementsByClassName("time")[1].innerHTML = document.getElementsByClassName("time")[0].value;
+    document.getElementsByClassName("monsters")[1].innerHTML = document.getElementsByClassName("monsters")[0].innerHTML;
+    document.getElementsByClassName("sixty")[1].value = document.getElementsByClassName("sixty")[0].value;
+    document.getElementsByClassName("thirty")[1].value = document.getElementsByClassName("thirty")[0].value;
+	document.getElementsByClassName("ten")[1].value = document.getElementsByClassName("ten")[0].value;
+	
+	//document.getElementById("song").currentTime = 0; // reset song
+	//document.getElementById("song").play(); 
+	
+	Start();
+
+	document.querySelector('#stopGameButton').disabled = false;
 };
+
+
+function stopGame(){
+	document.querySelector('#stopGameButton').disabled = true;
+
+	document.querySelector('#newGameButton').disabled = false;
+}
+
 function stopGame(){
 	document.querySelector('#end').close();
-	window.clearInterval(interval);
+	clearInterval(interval);
 	document.getElementById("song").pause(); // reset song
 	// document.getElementsByClassName("time")[1].innerHTML = 0;
 	document.getElementsByClassName("time")[1].disabled = true;
 	time_elapsed = 0;
+	document.querySelector('#newGameButton').disabled = false;
 };
 function Start() {
 	amountCircles = document.getElementsByClassName("balls")[1].innerHTML;
 	board = new Array();
+	time_elapsed = 0;
 	score = 0;
 	loses = 0;
 	maxLoses = 5;
@@ -89,6 +119,7 @@ function Start() {
 				2 + Math.floor(Math.random() * 10) == i 
 			) {
 				board[i][j] = 4; // obstacles
+				cnt--;
 			} else {
 				var randomNum = Math.random();
 				var ball;
@@ -204,7 +235,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 150);
+	interval = setInterval(UpdatePosition, 250);
 
 
 	
@@ -465,14 +496,21 @@ function Draw() {
 
 }
 
-
+var UpdatePositionCnt = 0;
 //updated the if conditions to suit the walls
 function UpdatePosition() {
 	
+	if (UpdatePositionCnt > 0){
+		return;
+	}
+	UpdatePositionCnt++;
+
 	timeCounter++;
 
 	board[shape.i][shape.j] = 0;
 	x = GetKeyPressed();
+	// console.log(x);
+	
 	if (x == 1) { //up
 		if (shape.j > 1 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
@@ -661,13 +699,22 @@ function UpdatePosition() {
 		//Game time
 	}
 
+	if(score >= 100){
+		clearInterval(interval);
+		document.getElementById("gameResult").innerHTML = "Winner!!!";
+		stopGame();
+		UpdatePositionCnt--;
+		return;
+	}
+
 	if (score >= 50 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	else if(score >= 100){
-		document.getElementById("gameResult").innerHTML = "Winner!!!";
-	}
-	else {
-		Draw();
-	}
+	// else {
+		
+	// }
+	Draw();
+
+	UpdatePositionCnt--;
+	console.log(UpdatePositionCnt);
 }

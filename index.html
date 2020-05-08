@@ -196,7 +196,7 @@
 			<br/>
 			<p>
 			
-				<input id="gameTime" type="number" value="60" min="60" class="time"  />
+				<input id="gameTime" type="number" value="60000000" min="60" class="time"  />
 				<img src="http://i.imgur.com/yOadS1c.png"  width="20" height="20" class="minus" />
 				<img  src="http://i.imgur.com/98cvZnj.png" width="20" height="20" class="add" />
 			</p>
@@ -246,8 +246,8 @@
 				<strong>60% of 5 points:  </strong><input type="color" class="sixty" name="favcolor"><br/>
 				<strong>30% of 15 points:  </strong><input type="color" class="thirty" name="favcolor"><br/>
 				<strong>10% of 25 points:  </strong><input type="color" class="ten" name="favcolor"><br/>
-				<button  onclick="newStart();">Start New Game</button>
-				<button  onclick="stopGame();">Stop the Game</button>
+				<button id="newGameButton"  onclick="newStart();">Start New Game</button>
+				<button id="stopGameButton"  onclick="stopGame();">Stop the Game</button>
 
 			</div>
 
