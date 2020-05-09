@@ -1,11 +1,11 @@
 @font-face {
   font-family: logoFont;
-  src: url(PAC-FONT.TTF);
+  src: url(resources/PAC-FONT.TTF);
 }
 
 @font-face {
   font-family: myFont;
-  src: url(GALS.ttf);
+  src: url(resources/GALS.ttf);
 }
 
 
@@ -43,6 +43,7 @@ body{
     margin-left:auto;
     margin-right:auto;
     width: 70%;
+    height: 70%;
     font-family: myFont;
     overflow: hidden; 
 }
@@ -61,7 +62,7 @@ div.page{
     bottom: 15%;
     right: 0;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     visibility: hidden;
     margin-left: 25%;
     position: absolute;
@@ -74,7 +75,7 @@ div.page{
 }
 
 div.settings{
-  overflow: scroll; 
+  overflow-y: scroll; 
 }
 
 div.game{
@@ -120,7 +121,7 @@ div.game{
     width: 50%;
     }
 
-    input[type=text], input[type=email], input[type=date]{
+    input[type=text],input[type=password], input[type=email], input[type=date]{
     background-color: aliceblue(107, 107, 107);
     width: 40%;
     padding: 12px;
@@ -160,4 +161,24 @@ input[type=range], h1, p{
 
 #lblScore, #lblTime, #lblLose{
   width: 60%;
+}
+
+
+button:disabled {
+  background: #dddddd;
+}
+p.keyP{
+  left: 0;
+  
+}
+dialog{
+  width: 20%;
+}
+span.keysInDialog{
+  margin-left: 50%;
+}
+
+#gameResult{
+  margin-left: 35%;
+  font-size: xx-large;
 }

@@ -14,25 +14,36 @@ var database = [
     $('#homeLink').click(function() {
         $(".page").css("visibility","hidden");
         $(".homepage").css("visibility","visible");
+        document.getElementById("song").pause();
     });
 
     $('#registerLink').click(function() {
+        document.getElementById("song").pause();
         $(".page").css("visibility","hidden");
         $(".homepage").css("visibility","hidden");
         $(".b").css("visibility","visible");
         $(".b").css("position","absolute");
+        document.getElementById('UserName').value = '';
+        document.getElementById('Password').value = '';
+        document.getElementById('FullName').value = '';
+        document.getElementById('Email').value = '';
+        document.getElementById('BirthDate').value = '';
 
     });
 
     $('#loginLink').click(function() {
+        document.getElementById("song").pause();
         $(".page").css("visibility","hidden");
         $(".homepage").css("visibility","hidden");
         $(".c").css("visibility","visible");
         $(".c").css("position","absolute");
+        document.getElementById('un').value = '';
+        document.getElementById('us').value = '';
 
     });
 
     $('#aboutLink').click(function() {
+        document.getElementById("song").pause();
         $(".page").css("visibility","hidden");
         $(".homepage").css("visibility","visible");
         $(".d").css("visibility","visible");    
@@ -52,6 +63,7 @@ function logPageFunction() {
 };
 
 function homePageFunction() {
+    document.querySelector('#end').close();
     document.getElementById('homeLink').click();
 };
 
@@ -59,6 +71,7 @@ function homePageFunction() {
 // --------------------------------------------------------- REGISTER -------------------------------------------------
 
 function registration(){
+    
     document.querySelector('#regForm').onsubmit = function(event) {
         
         event.preventDefault(); // prevent submission of the form’s data
@@ -129,7 +142,7 @@ function registration(){
             });
 
             // redirect to home page (TODO: change to game page)
-            homePageFunction();
+            logPageFunction();
         }  
     };
 }
@@ -224,7 +237,8 @@ $(function() {
     }
     return color;
   }
-  
+
+  /*
   function startGame(){
     $(".page").css("visibility","hidden");
     $(".homepage").css("visibility","hidden");
@@ -239,3 +253,4 @@ $(function() {
     document.getElementsByClassName("ten")[1].value = document.getElementsByClassName("ten")[0].value;
     Start();
 };
+*/
