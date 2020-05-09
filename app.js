@@ -566,7 +566,7 @@ function UpdatePosition() {
 	// Move monster and bonus
 	if (timeCounter % 5 == 0){ // speed of changing place
 		// Move monster
-		for (var n = 0; n < amountMonsters; n++){
+		for (let n = 0; n < amountMonsters; n++){
 		
 			let newI;
 			if(monsters[n].i < shape.i){
@@ -582,7 +582,19 @@ function UpdatePosition() {
 	
 			if(board[newI][monsters[n].j] != 4)
 			{
+
+				let oldI = monsters[n].i;
 				monsters[n].i = newI;
+				for (let k = 0; k < amountMonsters; k++){
+					if(n == k){
+						continue;
+					}
+
+					if(monsters[n].i == monsters[k].i){
+						monsters[n].i = oldI;
+					}
+				}
+				
 			}
 	
 			let newJ;
@@ -599,7 +611,18 @@ function UpdatePosition() {
 	
 			if(board[monsters[n].i][newJ] != 4)
 			{
+				let oldJ = monsters[n].j;
 				monsters[n].j = newJ;
+				for (let k = 0; k < amountMonsters; k++){
+					if(n == k){
+						continue;
+					}
+
+					if(monsters[n].i == monsters[k].i){
+						monsters[n].i = oldJ;
+					}
+				}
+				
 			}
 		}
 
