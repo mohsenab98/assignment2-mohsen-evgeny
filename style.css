@@ -1,11 +1,11 @@
 @font-face {
   font-family: logoFont;
-  src: url(PAC-FONT.TTF);
+  src: url(resources/PAC-FONT.TTF);
 }
 
 @font-face {
   font-family: myFont;
-  src: url(GALS.ttf);
+  src: url(resources/GALS.ttf);
 }
 
 
@@ -121,7 +121,7 @@ div.game{
     width: 50%;
     }
 
-    input[type=text], input[type=email], input[type=date]{
+    input[type=text],input[type=password], input[type=email], input[type=date]{
     background-color: aliceblue(107, 107, 107);
     width: 40%;
     padding: 12px;

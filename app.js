@@ -170,10 +170,10 @@ function Start() {
 
 	// monsters
 	monsters = [
-		{i:1, j:1, img: 'blue.png'},
-		{i:1, j:10, img: 'grey.png'},
-		{i:10, j:1, img: 'pink.png'},
-		{i:10, j:10, img: 'red.png'}
+		{i:1, j:1, img: 'resources/blue.png'},
+		{i:1, j:10, img: 'resources/grey.png'},
+		{i:10, j:1, img: 'resources/pink.png'},
+		{i:10, j:10, img: 'resources/red.png'}
 	]
 
 	// bonus
@@ -500,7 +500,7 @@ function Draw() {
 	// bonus khaleesi
 	if(indexBonus.draw){
 		let khaleesi = document.createElement("img");
-		khaleesi.setAttribute('src', "khaleesi.png");
+		khaleesi.setAttribute('src', "resources/khaleesi.png");
 		
 		context.drawImage(khaleesi, indexBonus.i * 60, indexBonus.j * 60);
 	}
@@ -509,7 +509,7 @@ function Draw() {
 	for(let d = 0; d < drug.length; d++){
 		if(drug[d].draw){
 			let drugImg = document.createElement("img");
-			drugImg.setAttribute('src', "drug.png");
+			drugImg.setAttribute('src', "resources/drug.png");
 			
 			context.drawImage(drugImg, drug[d].i * 60, drug[d].j * 60);
 		}
@@ -519,7 +519,7 @@ function Draw() {
 	for(let t = 0; t < timer.length; t++){
 		if(timer[t].draw){
 			let timerImg = document.createElement("img");
-			timerImg.setAttribute('src', "timer.png");
+			timerImg.setAttribute('src', "resources/timer.png");
 			
 			context.drawImage(timerImg, timer[t].i * 60, timer[t].j * 60);
 		}
