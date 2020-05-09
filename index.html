@@ -40,7 +40,7 @@
 			<br/>	
 			<br/>
 			<br/>
-				<img src="pacGif.gif"  alt="sometext"  id="gif"/>
+				<img src="resources/pacGif.gif"  alt="sometext"  id="gif"/>
 			<br/>
 			<br/>
 			<br/>
@@ -60,7 +60,7 @@
 		<div class="page b">
 			<form id="regForm" method="POST" action="#" onclick="registration()">
 				<label for="UserName">User name: </label> 	<input type="text" id="UserName" name="UserName" placeholder="Enter your new user name"><br/>
-				<label for="Password">Password: </label> 	<input type="text" id="Password"  name="Password" placeholder="Enter your new password"><br/>
+				<label for="Password">Password: </label> 	<input type="password" id="Password"  name="Password" placeholder="Enter your new password"><br/>
 				<label for="FullName">Full name: </label> 	<input type="text" id="FullName"  name="FullName" placeholder="Enter your full name"><br/>
 				<label for="Email">E-mail: </label> 		<input type="email" id="Email"  name="Email" placeholder="Enter your E-mail"><br/>
 				<label for="BirthDate">Birth Date: </label>	<input type="date" id="BirthDate"  name="BirthDate" placeholder="Enter your birth date"><br/>
@@ -73,7 +73,7 @@
 		<div class="page c">
 			<form id="loginForm" method="POST" action="#" onclick="signIn()">
 				<label for="UserNameLogIN">User name: </label>	<input id="un" type="text" name="UserNameLogIN" placeholder="Enter your user name"><br>
-				<label for="PasswordLogIN">Password: </label>	<input id="us" type="text" name="PasswordLogIN" placeholder="Enter your password"><br>
+				<label for="PasswordLogIN">Password: </label>	<input id="us" type="password" name="PasswordLogIN" placeholder="Enter your password"><br>
 				<input type="submit" value="Log-In">
 			  </form> 		
 		</div>
@@ -104,9 +104,10 @@
 							</br>
 							<h5>Challenges:</h5>
 							<ol>
-								<li>Coffee</li>
-								<li>Tea</li>
-								<li>Milk</li>
+								<li>New language and syntax</li>
+								<li>Work with events</li>
+								<li>Bugs of css</li>
+								<li>Debugging code</li>
 							</ol> 
 						</div>
 					</div>
@@ -127,9 +128,10 @@
 			<!-- UP -->
 			<button id="upButton" onclick="getUpKey()">Choose UP</button>
 			<dialog class="keysDialog" id ="upDialog">
-				<p>Press key for UP:</p>
+				<p class="keyP">Press key for UP:</p>
 				<span class="keysInDialog" id="upSpan"></span>
-				<button id="upClose">Close</button>
+				<br/>
+				<button id="upClose">Submit</button>
 			</dialog>
 
 			<br/>
@@ -137,10 +139,11 @@
 
 			<!-- DOWN -->
 			<button id="downButton" onclick="getDownKey()">Choose DOWN</button>
-			<dialog id ="downDialog">
-				<p>Press key for DOWN:</p>
+			<dialog class="keysDialog" id ="downDialog">
+				<p class="keyP">Press key for DOWN:</p>
 				<span class="keysInDialog" id="downSpan"></span>
-				<button id="downClose">Close</button>
+				<br/>
+				<button id="downClose">Submit</button>
 			</dialog>
 
 			<br/>
@@ -148,10 +151,11 @@
 
 			<!-- LEFT -->
 			<button id="leftButton" onclick="getLeftKey()">Choose LEFT</button>
-			<dialog id ="leftDialog">
-				<p>Press key for LEFT:</p>
+			<dialog class="keysDialog" id ="leftDialog">
+				<p class="keyP">Press key for LEFT:</p>
 				<span class="keysInDialog" id="leftSpan"></span>
-				<button id="leftClose">Close</button>
+				<br/>
+				<button id="leftClose">Submit</button>
 			</dialog>
 
 			<br/>
@@ -159,10 +163,11 @@
 
 			<!-- RIGHT -->
 			<button id="rightButton" onclick="getRightKey()">Choose RIGHT</button>
-			<dialog id ="rightDialog">
-				<p>Press key for RIGHT:</p>
+			<dialog class="keysDialog" id ="rightDialog">
+				<p class="keyP">Press key for RIGHT:</p>
 				<span text-align="center" class="keysInDialog" id="rightSpan"></span>
-				<button id="rightClose">Close</button>
+				<br/>
+				<button id="rightClose">Submit</button>
 			</dialog>
 			  
 			<br/>
@@ -171,7 +176,7 @@
 			<!-- range -->
 			<label>Change amount of balls:</label>
 			<br/>
-			<input type="range" min="50" max="90" value="50" class="slider circle" oninput="circleFunction(this);">
+			<input id="gameBalls" type="range" min="50" max="90" value="50" class="slider circle" oninput="circleFunction(this);">
 			<p>Value: <span id="rangeCircle" class="balls">50</span></p>
 				
 			<!-- colors -->
@@ -193,8 +198,8 @@
 			<p>
 			
 				<input id="gameTime" type="number" value="60" min="60" class="time"  />
-				<img src="http://i.imgur.com/yOadS1c.png"  width="20" height="20" class="minus" />
-				<img  src="http://i.imgur.com/98cvZnj.png" width="20" height="20" class="add" />
+				<img src="resources/minus.png"  width="20" height="20" class="minus" />
+				<img  src="resources/add.png" width="20" height="20" class="add" />
 			</p>
 				
 				
@@ -202,7 +207,7 @@
 			<!-- monster -->
 			<br/>
 			<label>Change amount of the monsters (from 1 to 4):</label>
-			<input type="range" min="1" max="4" value="1" class="slider monster" oninput="monsterFunction(this);">
+			<input id="gameMonsters" type="range" min="1" max="4" value="1" class="slider monster" oninput="monsterFunction(this);">
 			<p>Value: <span id="rangeMonster" class="monsters">1</span></p>
 
 			<!-- random settings -->
@@ -210,7 +215,7 @@
 			<button id="random" onclick="randomSettings();">Random Settings</button>
 
 			<button  onclick="startGame();">Start the Game</button>
-			
+
 		</div>
 
 
@@ -219,7 +224,7 @@
 		<br/>
 		<div class="page game">
             <audio id="song">
-				<source src="Pac-Man-Fever.mp3" type="audio/mpeg">
+				<source src="resources/Pac-Man-Fever.mp3" type="audio/mpeg">
 			</audio>
 
 			<div id="left">
@@ -242,7 +247,8 @@
 				<strong>60% of 5 points:  </strong><input type="color" class="sixty" name="favcolor"><br/>
 				<strong>30% of 15 points:  </strong><input type="color" class="thirty" name="favcolor"><br/>
 				<strong>10% of 25 points:  </strong><input type="color" class="ten" name="favcolor"><br/>
-				<button  onclick="newStart();">Start New Game</button>
+				<button id="newGameButton"  onclick="startGame();">Start New Game</button>
+				<button id="stopGameButton"  onclick="stopGame();">Stop the Game</button>
 
 			</div>
 
@@ -252,15 +258,25 @@
 				<div id="game">
 					<canvas id="canvas" height="700" width="700"></canvas>
 				</div>
+				<dialog id="end" >
+					<strong id="gameResult"> </strong><br/>
+					<!-- <h3>Game Over</h3> -->
+					<button onclick="startGame();">New Game</button>
+					<button onclick="homePageFunction()">Home</button>
+				</dialog>
 			</div>
 		  </div>
 
+
+
+		  </div>
 		<!-- footer -->
 		<div class="footer">
 			Posted by: Hege Refsnes<br/>
 			Contact information: <a href="mailto:someone@example.com">someone@example.com</a>.
 		  </div>
 		
+
 
 		
 	</body>
